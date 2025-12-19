@@ -1,6 +1,7 @@
 package com.B2BMarket.ordering;
 
 import com.B2BMarket.ordering.domain.entity.Customer;
+import com.B2BMarket.ordering.domain.utility.IdGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -12,7 +13,7 @@ public class CustomerTests {
     @Test
     public void testingCustomers(){
         Customer customer = new Customer(
-                UUID.randomUUID(),
+                IdGenerator.generateTimeBasedUUID(),
                 "Rai Braz",
                 LocalDate.of(1991, 7, 5),
                 "raibs@email.com",
@@ -21,7 +22,6 @@ public class CustomerTests {
                 true,
                 OffsetDateTime.now()
         );
-
         customer.addLoyaltyPoints(10);
 
     }
