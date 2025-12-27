@@ -9,6 +9,7 @@ public class FieldValidations {
 
     }
 
+
     public static void requiresValidEmail(String email){
         requiresValidEmail(email, null);
     }
