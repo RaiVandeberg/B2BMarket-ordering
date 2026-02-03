@@ -2,6 +2,7 @@ package com.B2BMarket.ordering.domain.entity;
 
 import com.B2BMarket.ordering.domain.exception.CustomerArchivedException;
 import com.B2BMarket.ordering.domain.valueObject.*;
+import com.B2BMarket.ordering.domain.valueObject.id.CustomerId;
 import lombok.Builder;
 
 import java.time.OffsetDateTime;
