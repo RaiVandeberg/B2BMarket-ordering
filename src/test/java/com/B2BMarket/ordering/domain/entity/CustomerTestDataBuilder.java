@@ -1,6 +1,7 @@
 package com.B2BMarket.ordering.domain.entity;
 
 import com.B2BMarket.ordering.domain.valueObject.*;
+import com.B2BMarket.ordering.domain.valueObject.id.CustomerId;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
