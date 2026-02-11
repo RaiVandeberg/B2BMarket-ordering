@@ -1,6 +1,7 @@
 package com.B2BMarket.ordering.domain.entity;
 
 
+import com.B2BMarket.ordering.domain.exception.OrderInvalidShippingDeliveryDateException;
 import com.B2BMarket.ordering.domain.exception.OrderStatusCannotBeChangedException;
 import com.B2BMarket.ordering.domain.valueObject.*;
 import com.B2BMarket.ordering.domain.valueObject.id.CustomerId;
@@ -90,15 +91,22 @@ class OrderTest {
 
     @Test
     public void giverDraftOrder_whenPlace_shouldChangeToPlaced(){
-        Order order = Order.draft(new CustomerId());
+        Order order = OrderTestDataBuilder.anOrder().build();
         order.place();
         Assertions.assertThat(order.isPlaced()).isTrue();
     }
 
     @Test
+    public void givenPlacedOrder_whenPaid_shouldChangeToPaid(){
+        Order order = OrderTestDataBuilder.anOrder().status(OrderStatus.PLACED).build();
+        order.markAsPaid();
+        Assertions.assertThat(order.isPaid()).isTrue();
+        Assertions.assertThat(order.paidAt()).isNotNull();
+    }
+
+    @Test
     public void givenPlacedOrder_whenTryToPlace_shouldGenerateException(){
-        Order order = Order.draft(new CustomerId());
-        order.place();
+        Order order = OrderTestDataBuilder.anOrder().status(OrderStatus.PLACED).build();
         Assertions.assertThatExceptionOfType(OrderStatusCannotBeChangedException.class)
                 .isThrownBy(order::place);
     }
@@ -153,7 +161,7 @@ class OrderTest {
 
         Order order = Order.draft(new CustomerId());
         Money shippingCost = Money.ZERO;
-        LocalDate expectedDeliveryDate = LocalDate.now();
+        LocalDate expectedDeliveryDate = LocalDate.now().plusDays(1);
 
         order.changeShipping(shippingInfo, shippingCost, expectedDeliveryDate);
 
@@ -162,6 +170,35 @@ class OrderTest {
                 o -> Assertions.assertThat(o.shippingCost()).isEqualTo(shippingCost),
                 o -> Assertions.assertThat(o.expectedDeliveryDate()).isEqualTo(expectedDeliveryDate)
                 );
+    }
+
+
+    @Test
+    public void givenDraftOrderAndDeliveryDateInThePast_whenChangeShippingInfo_shouldNotAllowChange(){
+        Address address = Address.builder()
+                .street("Nelson costa")
+                .number("1234")
+                .neighborhood("Nort Street")
+                .complement("House black")
+                .city("Berlin")
+                .state("Bahia")
+                .zipCode(new ZipCode("78487")).build();
+
+        ShippingInfo shippingInfo = ShippingInfo.builder()
+                .address(address)
+                .fullName(new FullName("Rai", "Braz"))
+                .document(new Document("111-11-1111"))
+                .phone(new Phone(" 111-444-2512"))
+                .build();
+
+        Order order = Order.draft(new CustomerId());
+        Money shippingCost = Money.ZERO;
+        LocalDate expectedDeliveryDate = LocalDate.now().minusDays(2);
+
+        Assertions.assertThatExceptionOfType(OrderInvalidShippingDeliveryDateException.class)
+                .isThrownBy(() -> order.changeShipping(shippingInfo, shippingCost, expectedDeliveryDate));
+
+
     }
 
 }
