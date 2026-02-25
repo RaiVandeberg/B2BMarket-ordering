@@ -6,6 +6,8 @@ import com.B2BMarket.ordering.domain.valueObject.id.ProductId;
 
 import java.time.LocalDate;
 
+import static javax.print.attribute.standard.JobState.CANCELED;
+
 public class OrderTestDataBuilder {
 
     private CustomerId customerId = new CustomerId();
@@ -31,19 +33,22 @@ public class OrderTestDataBuilder {
         return new OrderTestDataBuilder();
     }
 
-    public Order build(){
+    public Order build() {
         Order order = Order.draft(customerId);
         order.changeShipping(shippingInfo, shippingCost, expectedDeliveryDate);
         order.changeBilling(billingInfo);
         order.changePaymentMethod(paymentMethod);
 
-        if(withItems){
-            order.addItem(new ProductId(), new ProductName("Notebook x11"),
-                    new Money("3000"), new Quantity(2));
+        if (withItems) {
+            order.addItem(ProductTestDataBuilder.aProduct().build(),
+                    new Quantity(2)
+            );
 
-            order.addItem(new ProductId(), new ProductName("Memory Ram 4RAM"),
-                    new Money("200"), new Quantity(1));
+            order.addItem(ProductTestDataBuilder.aProductAltRamMemory().build(),
+                    new Quantity(1)
+            );
         }
+
         switch (this.status) {
             case DRAFT -> {
             }
@@ -59,6 +64,7 @@ public class OrderTestDataBuilder {
             case CANCELLED -> {
             }
         }
+
         return order;
     }
 

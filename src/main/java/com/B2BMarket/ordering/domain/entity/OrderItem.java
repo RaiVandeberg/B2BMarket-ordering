@@ -1,6 +1,7 @@
 package com.B2BMarket.ordering.domain.entity;
 
 import com.B2BMarket.ordering.domain.valueObject.Money;
+import com.B2BMarket.ordering.domain.valueObject.Product;
 import com.B2BMarket.ordering.domain.valueObject.ProductName;
 import com.B2BMarket.ordering.domain.valueObject.Quantity;
 import com.B2BMarket.ordering.domain.valueObject.id.OrderId;
@@ -36,15 +37,18 @@ public class OrderItem {
     }
 
     @Builder(builderClassName = "BrandNewOrderItemBuilder", builderMethodName = "brandNew")
-    private static OrderItem createBrandNew( OrderId orderId,
-                            ProductId productId, ProductName productName,
-                                      Money price, Quantity quantity){
+    private static OrderItem createBrandNew(OrderId orderId,
+                                            Product product,
+                                            Quantity quantity){
+        Objects.requireNonNull(product);
+        Objects.requireNonNull(orderId);
+        Objects.requireNonNull(quantity);
         OrderItem orderItem = new OrderItem(
                 new OrderItemId(),
                 orderId,
-                productId,
-                productName,
-                price,
+                product.id(),
+                product.name(),
+                product.price(),
                 quantity,
                 Money.ZERO
         );
@@ -54,12 +58,14 @@ public class OrderItem {
         return orderItem;
     }
 
-    public OrderItemId id() {
-        return id;
+    void changeQuantity(Quantity quantity){
+        Objects.requireNonNull(quantity);
+        this.setQuantity(quantity);
+        this.recalculateTotals();
     }
 
-    public OrderId orderId() {
-        return orderId;
+    public OrderItemId id() {
+        return id;
     }
 
     public ProductId productId() {
