@@ -1,17 +1,25 @@
 package com.B2BMarket.ordering.domain.valueObject;
 
-import com.B2BMarket.ordering.domain.entity.CustomerTestDataBuilder;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
 
 class ShippingInfoTest {
 
     @Test
     void given_validShippingInfo_whenCreate_shouldSucceed() {
-        ShippingInfo shippingInfo = ShippingInfo.builder()
+
+        Recipient recipient = Recipient.builder()
                 .fullName(new FullName("Jane", "Doe"))
                 .document(new Document("987-65-4321"))
                 .phone(new Phone("999-888-7777"))
+                .build();
+
+        Shipping shipping = Shipping.builder()
+                .cost(new Money("50"))
+                .expectedDate(LocalDate.now().plusDays(3))
+                .recipient(recipient)
                 .address(
                         AddressTestDataBuilder
                                 .defaultAddress()
@@ -19,16 +27,17 @@ class ShippingInfoTest {
                 )
                 .build();
 
-        Assertions.assertThat(shippingInfo).isNotNull();
+        Assertions.assertThat(shipping).isNotNull();
     }
 
     @Test
     void given_nullField_whenCreateShippingInfo_shouldThrowException() {
+
         Assertions.assertThatExceptionOfType(NullPointerException.class)
-                .isThrownBy(() -> ShippingInfo.builder()
-                        .fullName(new FullName("Jane", "Doe"))
-                        .document(null)
-                        .phone(new Phone("999-888-7777"))
+                .isThrownBy(() -> Shipping.builder()
+                        .cost(new Money("50"))
+                        .expectedDate(LocalDate.now().plusDays(3))
+                        .recipient(null)
                         .address(
                                 AddressTestDataBuilder
                                         .defaultAddress()
