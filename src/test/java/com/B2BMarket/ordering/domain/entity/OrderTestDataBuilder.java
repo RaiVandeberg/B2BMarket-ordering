@@ -68,7 +68,9 @@ public class OrderTestDataBuilder {
                 .address(anAddress())
                 .document(new Document("225-09-1992"))
                 .phone(new Phone("123-111-9911"))
-                .fullName(new FullName("John", "Doe")).build();
+                .fullName(new FullName("John", "Doe"))
+                .email(new Email("rai.braz@gmail.com"))
+                .build();
     }
 
     public static Shipping aShipping() {

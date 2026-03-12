@@ -25,8 +25,10 @@ public class OrderItem {
     private Money totalAmount;
 
     @Builder(builderClassName = "ExistingOrderItemBuilder", builderMethodName = "existing")
-    public OrderItem(OrderItemId id, OrderId orderId, ProductId productId,
-                     ProductName productName, Money price, Quantity quantity, Money totalAmount) {
+    public OrderItem(OrderItemId id, OrderId orderId,
+                     ProductId productId, ProductName productName,
+                     Money price, Quantity quantity,
+                     Money totalAmount) {
         this.setId(id);
         this.setOrderId(orderId);
         this.setProductId(productId);
@@ -39,10 +41,11 @@ public class OrderItem {
     @Builder(builderClassName = "BrandNewOrderItemBuilder", builderMethodName = "brandNew")
     private static OrderItem createBrandNew(OrderId orderId,
                                             Product product,
-                                            Quantity quantity){
+                                            Quantity quantity) {
         Objects.requireNonNull(product);
         Objects.requireNonNull(orderId);
         Objects.requireNonNull(quantity);
+
         OrderItem orderItem = new OrderItem(
                 new OrderItemId(),
                 orderId,
@@ -58,7 +61,7 @@ public class OrderItem {
         return orderItem;
     }
 
-    void changeQuantity(Quantity quantity){
+    void changeQuantity(Quantity quantity) {
         Objects.requireNonNull(quantity);
         this.setQuantity(quantity);
         this.recalculateTotals();
@@ -66,6 +69,10 @@ public class OrderItem {
 
     public OrderItemId id() {
         return id;
+    }
+
+    public OrderId orderId() {
+        return orderId;
     }
 
     public ProductId productId() {
@@ -88,10 +95,9 @@ public class OrderItem {
         return totalAmount;
     }
 
-    private void recalculateTotals(){
+    private void recalculateTotals() {
         this.setTotalAmount(this.price().multiply(this.quantity()));
     }
-
 
     private void setId(OrderItemId id) {
         Objects.requireNonNull(id);
@@ -139,4 +145,5 @@ public class OrderItem {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
 }
