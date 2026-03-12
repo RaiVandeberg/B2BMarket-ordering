@@ -112,6 +112,11 @@ public class Order {
         this.setReadyAt(OffsetDateTime.now());
     }
 
+    public void cancel() {
+        this.changeStatus(OrderStatus.CANCELLED);
+        this.setCancelledAt(OffsetDateTime.now());
+    }
+
     public void changePaymentMethod(PaymentMethod paymentMethod){
         verifyIfChangeable();
         Objects.requireNonNull(paymentMethod);
@@ -170,6 +175,11 @@ public class Order {
 
     public boolean isPaid(){
         return OrderStatus.PAID.equals(this.status());
+    }
+
+
+    public boolean isCanceled() {
+        return OrderStatus.CANCELLED.equals(this.status());
     }
 
 
