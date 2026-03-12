@@ -1,9 +1,6 @@
 package com.B2BMarket.ordering.domain.entity;
 
-import com.B2BMarket.ordering.domain.exception.OrderCannotBePlacedException;
-import com.B2BMarket.ordering.domain.exception.OrderDoesNotContainOrderItemException;
-import com.B2BMarket.ordering.domain.exception.OrderInvalidShippingDeliveryDateException;
-import com.B2BMarket.ordering.domain.exception.OrderStatusCannotBeChangedException;
+import com.B2BMarket.ordering.domain.exception.*;
 import com.B2BMarket.ordering.domain.valueObject.*;
 import com.B2BMarket.ordering.domain.valueObject.id.CustomerId;
 import com.B2BMarket.ordering.domain.valueObject.id.OrderId;
@@ -76,6 +73,7 @@ public class Order {
     }
 
     public void addItem(Product product, Quantity quantity){
+        verifyIfChangeable();
         Objects.requireNonNull(product);
         Objects.requireNonNull(quantity);
 
@@ -110,16 +108,19 @@ public class Order {
     }
 
     public void changePaymentMethod(PaymentMethod paymentMethod){
+        verifyIfChangeable();
         Objects.requireNonNull(paymentMethod);
         this.setPaymentMethod(paymentMethod);
     }
 
     public void changeBilling(BillingInfo billing){
+        verifyIfChangeable();
         Objects.requireNonNull(billing);
         this.setBilling(billing);
     }
 
     public void changeShipping(Shipping newShipping){
+        verifyIfChangeable();
         Objects.requireNonNull(newShipping);
 
 
@@ -133,6 +134,7 @@ public class Order {
     }
 
     public void changeItemQuantity(OrderItemId orderItemId, Quantity quantity){
+        verifyIfChangeable();
         Objects.requireNonNull(orderItemId);
         Objects.requireNonNull(quantity);
 
@@ -250,6 +252,12 @@ public class Order {
         }
         if(this.items() == null || this.items().isEmpty()){
             throw OrderCannotBePlacedException.noItems(this.id());
+        }
+    }
+
+    private void verifyIfChangeable() {
+        if (!isDraft()) {
+            throw new OrderCannotBeEditedException(this.id(), this.status());
         }
     }
 
