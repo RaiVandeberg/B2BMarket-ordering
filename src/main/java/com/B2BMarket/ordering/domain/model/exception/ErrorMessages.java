@@ -32,4 +32,17 @@ public class ErrorMessages {
     public static final String ERROR_ORDER_CANNOT_BE_EDITED =
             "Order %s with status %s cannot be edited";
 
+
+    public static final String ERROR_SHOPPING_CART_DOES_NOT_CONTAIN_ITEM
+            = "Shopping cart %s does not contain item %s";
+
+    public static final String ERROR_SHOPPING_CART_DOES_NOT_CONTAIN_PRODUCT
+            = "Shopping cart %s does not contain an item for the product %s";
+
+    public static final String ERROR_SHOPPING_CART_ITEM_INCOMPATIBLE_PRODUCT
+            = "Shopping cart item %s is incompatible with the product %s";
+
+    public static final String VALIDATION_ERROR_QUANTITY_MUST_BE_GREATER_THAN_ZERO
+            = "Quantity must be greater than zero";
+
 }
