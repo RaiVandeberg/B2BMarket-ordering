@@ -12,6 +12,7 @@ class BillingInfoTest {
                 .fullName(new FullName("John", "Doe"))
                 .document(new Document("123-45-6789"))
                 .phone(new Phone("123-456-7890"))
+                .email(new Email("john.doe@email.com"))
                 .address(
                         AddressTestDataBuilder
                                 .defaultAddress()
