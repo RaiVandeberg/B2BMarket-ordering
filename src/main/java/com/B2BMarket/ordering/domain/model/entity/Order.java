@@ -159,7 +159,9 @@ public class Order implements AggregateRoot<OrderId> {
         verifyIfChangeable();
         Objects.requireNonNull(orderItemId);
 
-        this.items.removeIf(item -> item.id().equals(orderItemId));
+        OrderItem orderItem = this.findOrderItem(orderItemId);
+
+        this.items.remove(orderItem);
 
         this.recalculateTotals();
     }

@@ -19,7 +19,7 @@ class OrderRemoveItemTest {
         Order order = OrderTestDataBuilder.anOrder().build();
         OrderItem itemToRemove = order.items().stream().findFirst().orElseThrow();
         BigDecimal expectedTotalAmount = order.totalAmount().value().subtract(itemToRemove.totalAmount().value());
-        int expectedTotalItems = 1;
+        int expectedTotalItems = order.totalItems().value() - itemToRemove.quantity().value();
 
         order.removeItem(itemToRemove.id());
 
