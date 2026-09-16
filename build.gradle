@@ -68,7 +68,7 @@ tasks.register('integrationTest', Test){
 		events "passed"
 	}
 
-	filter{
+	filter {
 		includeTestsMatching "*IT"
 		excludeTestsMatching "*Test"
 	}
