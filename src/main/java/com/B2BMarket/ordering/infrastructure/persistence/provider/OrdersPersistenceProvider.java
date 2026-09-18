@@ -3,6 +3,7 @@ package com.B2BMarket.ordering.infrastructure.persistence.provider;
 import com.B2BMarket.ordering.domain.model.entity.Order;
 import com.B2BMarket.ordering.domain.model.repository.Orders;
 import com.B2BMarket.ordering.domain.model.valueObject.id.OrderId;
+import com.B2BMarket.ordering.infrastructure.persistence.assembler.OrderPersistenceEntityAssembler;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
 import com.B2BMarket.ordering.infrastructure.persistence.repository.OrderPersistenceEntityRepository;import lombok.RequiredArgsConstructor;import org.springframework.stereotype.Component;
 
@@ -12,7 +13,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class OrdersPersistenceProvider implements Orders {
 
-    private final OrderPersistenceEntityRepository PersistenceEntityRepository;
+    private final OrderPersistenceEntityRepository persistenceEntityRepository;
+    private final OrderPersistenceEntityAssembler assembler;
 
     @Override
     public Optional<Order> ofId(OrderId orderId) {
@@ -26,11 +28,8 @@ public class OrdersPersistenceProvider implements Orders {
 
     @Override
     public void add(Order aggregateRoot) {
-       var persistenceEntity = OrderPersistenceEntity.builder()
-                .id(aggregateRoot.id().value().toLong())
-                .customerId(aggregateRoot.customerId().value())
-                .build();
-        PersistenceEntityRepository.saveAndFlush(persistenceEntity);
+        OrderPersistenceEntity persistenceEntity = assembler.fromDomain(aggregateRoot);
+        persistenceEntityRepository.saveAndFlush(persistenceEntity);
     }
 
     @Override
