@@ -5,8 +5,6 @@ import com.B2BMarket.ordering.domain.model.valueObject.id.CustomerId;
 
 import java.time.LocalDate;
 
-import static javax.print.attribute.standard.JobState.CANCELED;
-
 public class OrderTestDataBuilder {
 
     private CustomerId customerId = new CustomerId();
