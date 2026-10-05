@@ -4,6 +4,7 @@ import com.B2BMarket.ordering.domain.model.entity.Order;
 import com.B2BMarket.ordering.domain.model.repository.Orders;
 import com.B2BMarket.ordering.domain.model.valueObject.id.OrderId;
 import com.B2BMarket.ordering.infrastructure.persistence.assembler.OrderPersistenceEntityAssembler;
+import com.B2BMarket.ordering.infrastructure.persistence.disassembler.OrderPersistenceEntityDisassembler;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
 import com.B2BMarket.ordering.infrastructure.persistence.repository.OrderPersistenceEntityRepository;import lombok.RequiredArgsConstructor;import org.springframework.stereotype.Component;
 
@@ -15,10 +16,13 @@ public class OrdersPersistenceProvider implements Orders {
 
     private final OrderPersistenceEntityRepository persistenceEntityRepository;
     private final OrderPersistenceEntityAssembler assembler;
+    private final OrderPersistenceEntityDisassembler disassembler;
 
     @Override
     public Optional<Order> ofId(OrderId orderId) {
-        return Optional.empty();
+        Optional<OrderPersistenceEntity> possibleEntity = persistenceEntityRepository.findById(
+                orderId.value().toLong());
+        return possibleEntity.map(disassembler::toDomainEntity);
     }
 
     @Override

@@ -16,9 +16,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.springframework.context.annotation.Import;
 import com.B2BMarket.ordering.infrastructure.persistence.provider.OrdersPersistenceProvider;
 import com.B2BMarket.ordering.infrastructure.persistence.assembler.OrderPersistenceEntityAssembler;
+import  com.B2BMarket.ordering.infrastructure.persistence.disassembler.OrderPersistenceEntityDisassembler;
 
 @DataJpaTest
-@Import({OrdersPersistenceProvider.class,OrderPersistenceEntityAssembler.class})
+@Import({OrdersPersistenceProvider.class,
+        OrderPersistenceEntityAssembler.class,
+        OrderPersistenceEntityDisassembler.class})
 class OrdersIT {
 
     private Orders orders;
