@@ -22,7 +22,7 @@ public class Order implements AggregateRoot<OrderId> {
 
     private OffsetDateTime placedAt;
     private OffsetDateTime paidAt;
-    private OffsetDateTime cancelledAt;
+    private OffsetDateTime canceledAt;
     private OffsetDateTime readyAt;
 
     private BillingInfo billing;
@@ -35,7 +35,7 @@ public class Order implements AggregateRoot<OrderId> {
 
     @Builder(builderClassName = "ExistingOrderBuilder", builderMethodName = "existing")
     public Order(OrderId id, CustomerId customerId, Money totalAmount, Quantity totalItems,
-                 OffsetDateTime placedAt, OffsetDateTime paidAt, OffsetDateTime cancelledAt,
+                 OffsetDateTime placedAt, OffsetDateTime paidAt, OffsetDateTime canceledAt,
                  OffsetDateTime readyAt, BillingInfo billing, Shipping shipping, OrderStatus status,
                  PaymentMethod paymentMethod, Set<OrderItem> items) {
         this.setId(id);
@@ -44,7 +44,7 @@ public class Order implements AggregateRoot<OrderId> {
         this.setTotalItems(totalItems);
         this.setPlacedAt(placedAt);
         this.setPaidAt(paidAt);
-        this.setCancelledAt(cancelledAt);
+        this.setCanceledAt(canceledAt);
         this.setReadyAt(readyAt);
         this.setBilling(billing);
         this.setShipping(shipping);
@@ -114,7 +114,7 @@ public class Order implements AggregateRoot<OrderId> {
 
     public void cancel() {
         this.changeStatus(OrderStatus.CANCELLED);
-        this.setCancelledAt(OffsetDateTime.now());
+        this.setCanceledAt(OffsetDateTime.now());
     }
 
     public void changePaymentMethod(PaymentMethod paymentMethod){
@@ -209,8 +209,8 @@ public class Order implements AggregateRoot<OrderId> {
         return paidAt;
     }
 
-    public OffsetDateTime cancelledAt() {
-        return cancelledAt;
+    public OffsetDateTime canceledAt() {
+        return canceledAt;
     }
 
     public OffsetDateTime readyAt() {
@@ -322,8 +322,8 @@ public class Order implements AggregateRoot<OrderId> {
         this.paidAt = paidAt;
     }
 
-    private void setCancelledAt(OffsetDateTime cancelledAt) {
-        this.cancelledAt = cancelledAt;
+    private void setCanceledAt(OffsetDateTime canceledAt) {
+        this.canceledAt = canceledAt;
     }
 
     private void setReadyAt(OffsetDateTime readyAt) {

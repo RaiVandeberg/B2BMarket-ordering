@@ -15,7 +15,7 @@ class OrderCancelTest {
         order.cancel();
 
         assertThat(order.status()).isEqualTo(OrderStatus.CANCELLED);
-        assertThat(order.cancelledAt()).isNotNull();
+        assertThat(order.canceledAt()).isNotNull();
     }
 
     @Test
