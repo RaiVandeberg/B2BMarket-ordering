@@ -3,6 +3,7 @@ package com.B2BMarket.ordering.domain.model.repository;
 
 
 import com.B2BMarket.ordering.domain.model.entity.Order;
+import com.B2BMarket.ordering.domain.model.entity.OrderStatus;
 import com.B2BMarket.ordering.domain.model.entity.OrderTestDataBuilder;
 import com.B2BMarket.ordering.domain.model.valueObject.id.OrderId;
 import org.assertj.core.api.Assertions;
@@ -55,5 +56,25 @@ class OrdersIT {
                 s -> assertThat(s.status()).isEqualTo(originalOrder.status()),
                 s -> assertThat(s.paymentMethod()).isEqualTo(originalOrder.paymentMethod())
         );
+    }
+
+    @Test
+    public void shouldUpdateExistingOrder() {
+        Order order = OrderTestDataBuilder.anOrder().status(OrderStatus.PLACED).build();
+        orders.add(order);
+
+        order = orders.ofId(order.id()).orElseThrow();
+        order.markAsPaid();
+
+        orders.add(order);
+
+        order = orders.ofId(order.id()).orElseThrow();
+
+        Assertions.assertThat(order.isPaid()).isTrue();
+    }
+
+    @Test
+    public void shoulNotAllowStaleUpdates(){
+        
     }
 }
