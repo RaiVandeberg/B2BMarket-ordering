@@ -1,11 +1,9 @@
 package com.B2BMarket.ordering.infrastructure.persistence.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -42,10 +40,16 @@ public class OrderPersistenceEntity {
 
     @CreatedBy
     private UUID createdByUserId;
+
     @LastModifiedDate
     private OffsetDateTime lastModifiedAt;
+
     @LastModifiedBy
     private UUID lastModifiedByUserId;
+
+    @Version
+    private Long version;
+
 
 
 }

@@ -6,8 +6,14 @@ import com.B2BMarket.ordering.domain.model.valueObject.id.OrderId;
 import com.B2BMarket.ordering.infrastructure.persistence.assembler.OrderPersistenceEntityAssembler;
 import com.B2BMarket.ordering.infrastructure.persistence.disassembler.OrderPersistenceEntityDisassembler;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
-import com.B2BMarket.ordering.infrastructure.persistence.repository.OrderPersistenceEntityRepository;import lombok.RequiredArgsConstructor;import org.springframework.stereotype.Component;
+import com.B2BMarket.ordering.infrastructure.persistence.repository.OrderPersistenceEntityRepository;
+import jakarta.persistence.EntityManager;
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+import org.springframework.stereotype.Component;
+import org.springframework.util.ReflectionUtils;
 
+import java.lang.reflect.Field;
 import java.util.Optional;
 
 @Component
@@ -17,6 +23,8 @@ public class OrdersPersistenceProvider implements Orders {
     private final OrderPersistenceEntityRepository persistenceEntityRepository;
     private final OrderPersistenceEntityAssembler assembler;
     private final OrderPersistenceEntityDisassembler disassembler;
+
+    private final EntityManager entityManager;
 
     @Override
     public Optional<Order> ofId(OrderId orderId) {
@@ -47,16 +55,30 @@ public class OrdersPersistenceProvider implements Orders {
 
     private void update(Order aggregateRoot, OrderPersistenceEntity persistenceEntity) {
         persistenceEntity = assembler.merge(persistenceEntity, aggregateRoot);
+        entityManager.detach(persistenceEntity);
         persistenceEntityRepository.saveAndFlush(persistenceEntity);
+        uptadeVersion(aggregateRoot, persistenceEntity);
 
     }
+
 
     private void insert(Order aggregateRoot) {
         OrderPersistenceEntity persistenceEntity = assembler.fromDomain(aggregateRoot);
         persistenceEntityRepository.saveAndFlush(persistenceEntity);
+        uptadeVersion(aggregateRoot, persistenceEntity);
+
     }
 
-    
+    @SneakyThrows
+    private void uptadeVersion(Order aggregateRoot, OrderPersistenceEntity persistenceEntity) {
+        Field version = aggregateRoot.getClass().getDeclaredField("version");
+        version.setAccessible(true);
+        ReflectionUtils.setField(version, aggregateRoot, persistenceEntity.getVersion());
+        version.setAccessible(false);
+    }
+
+
+
 
     @Override
     public int count() {
