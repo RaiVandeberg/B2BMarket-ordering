@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Import;
 import com.B2BMarket.ordering.infrastructure.persistence.provider.OrdersPersistenceProvider;
 import com.B2BMarket.ordering.infrastructure.persistence.assembler.OrderPersistenceEntityAssembler;
 import  com.B2BMarket.ordering.infrastructure.persistence.disassembler.OrderPersistenceEntityDisassembler;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 
 @DataJpaTest
 @Import({OrdersPersistenceProvider.class,
@@ -85,11 +86,13 @@ class OrdersIT {
         orders.add(orderT1);
 
         orderT2.cancel();
-        orders.add(orderT2);
 
-        Order savedOrder = orders.ofId(order.id()).orElseThrow();
+        Assertions.assertThatExceptionOfType(ObjectOptimisticLockingFailureException.class)
+                .isThrownBy(() -> orders.add(orderT2));
 
-        Assertions.assertThat(savedOrder.paidAt()).isNotNull();
-        Assertions.assertThat(savedOrder.canceledAt()).isNotNull();
+        Order saveedOrder = orders.ofId(order.id()).orElseThrow();
+
+        Assertions.assertThat(saveedOrder.canceledAt()).isNull();
+        Assertions.assertThat(saveedOrder.paidAt()).isNotNull();
     }
 }
