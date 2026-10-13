@@ -2,7 +2,9 @@ package com.B2BMarket.ordering.infrastructure.persistence.assembler;
 
 import com.B2BMarket.ordering.domain.model.entity.Order;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderPersistenceEntityAssembler {
 
     public OrderPersistenceEntity fromDomain(Order order){
