@@ -41,7 +41,7 @@ public class OrderPersistenceEntityTestDataBuilder {
         return OrderItemPersistenceEntity.builder()
                 .id(IdGenerator.generateTSID().toLong())
                 .price(new BigDecimal(500))
-                .quantity(3)
+                .quantity(2)
                 .totalAmount(new BigDecimal(1000))
                 .productName("NoteBook")
                 .productId(IdGenerator.generateTimeBasedUUID());

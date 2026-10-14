@@ -117,7 +117,7 @@ public class OrderPersistenceEntity {
             return;
         }
         items.forEach(i -> i.setOrder(this));
-        this.setItems(items);
+        this.setItems(new HashSet<>(items));
     }
 
     public void addItem(OrderItemPersistenceEntity item) {
