@@ -8,6 +8,8 @@ import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderPersistence
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.util.Set;
+
 import com.B2BMarket.ordering.domain.model.utility.IdGenerator;
 
 
@@ -21,13 +23,38 @@ public class OrderPersistenceEntityTestDataBuilder {
         return  OrderPersistenceEntity.builder()
                 .id(IdGenerator.generateTSID().toLong())
                 .customerId(com.B2BMarket.ordering.domain.model.utility.IdGenerator.generateTimeBasedUUID())
-                .totalItems(2)
-                .totalAmount(new BigDecimal(1000))
+                .totalItems(3)
+                .totalAmount(new BigDecimal(1250))
                 .status("DRAFT")
                 .paymentMethod("CREDIT_CARD")
                 .placedAt(OffsetDateTime.now())
+                .items(Set.of(
+                        existingItem().build(),
+                        existingItemAlt().build()
+                ))
                 .billing(aBilling())
                 .shipping(aShipping());
+
+    }
+
+    public static OrderItemPersistenceEntity.OrderItemPersistenceEntityBuilder existingItem(){
+        return OrderItemPersistenceEntity.builder()
+                .id(IdGenerator.generateTSID().toLong())
+                .price(new BigDecimal(500))
+                .quantity(3)
+                .totalAmount(new BigDecimal(1000))
+                .productName("NoteBook")
+                .productId(IdGenerator.generateTimeBasedUUID());
+    }
+
+    public static OrderItemPersistenceEntity.OrderItemPersistenceEntityBuilder existingItemAlt(){
+        return OrderItemPersistenceEntity.builder()
+                .id(IdGenerator.generateTSID().toLong())
+                .price(new BigDecimal(250))
+                .quantity(1)
+                .totalAmount(new BigDecimal(250))
+                .productName("Mouse")
+                .productId(IdGenerator.generateTimeBasedUUID());
 
     }
 
