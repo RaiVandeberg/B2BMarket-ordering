@@ -4,6 +4,12 @@ import com.B2BMarket.ordering.domain.model.entity.OrderTestDataBuilder;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import com.B2BMarket.ordering.domain.model.entity.Order;
+import com.B2BMarket.ordering.domain.model.entity.PaymentMethod;
+import com.B2BMarket.ordering.domain.model.valueObject.Address;
+import com.B2BMarket.ordering.domain.model.valueObject.BillingInfo;
+import com.B2BMarket.ordering.domain.model.valueObject.Shipping;
+import com.B2BMarket.ordering.domain.model.valueObject.id.CustomerId;
+import com.B2BMarket.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
 
 import static org.assertj.core.api.Assertions.*;
@@ -27,6 +33,56 @@ class OrderPersistenceEntityAssemblerTest {
                 p -> assertThat(p.getPaidAt()).isEqualTo(order.paidAt()),
                 p -> assertThat(p.getCanceledAt()).isEqualTo(order.canceledAt()),
                 p -> assertThat(p.getReadyAt()).isEqualTo(order.readyAt())
+        );
+    }
+
+    @Test
+    void shouldConvertBillingAndShipping() {
+        Order order = OrderTestDataBuilder.anOrder().build();
+        OrderPersistenceEntity orderPersistenceEntity = assembler.fromDomain(order);
+
+        BillingInfo billing = order.billing();
+        assertThat(orderPersistenceEntity.getBilling()).satisfies(
+                b -> assertThat(b.getFirstName()).isEqualTo(billing.fullName().firstName()),
+                b -> assertThat(b.getLastName()).isEqualTo(billing.fullName().lastName()),
+                b -> assertThat(b.getDocument()).isEqualTo(billing.document().value()),
+                b -> assertThat(b.getPhone()).isEqualTo(billing.phone().value()),
+                b -> assertThat(b.getEmail()).isEqualTo(billing.email().value()),
+                b -> assertAddress(b.getAddress(), billing.address())
+        );
+
+        Shipping shipping = order.shipping();
+        assertThat(orderPersistenceEntity.getShipping()).satisfies(
+                s -> assertThat(s.getCost()).isEqualTo(shipping.cost().value()),
+                s -> assertThat(s.getExpectedDate()).isEqualTo(shipping.expectedDate()),
+                s -> assertThat(s.getRecipient().getFirstName()).isEqualTo(shipping.recipient().fullName().firstName()),
+                s -> assertThat(s.getRecipient().getLastName()).isEqualTo(shipping.recipient().fullName().lastName()),
+                s -> assertThat(s.getRecipient().getDocument()).isEqualTo(shipping.recipient().document().value()),
+                s -> assertThat(s.getRecipient().getPhone()).isEqualTo(shipping.recipient().phone().value()),
+                s -> assertAddress(s.getAddress(), shipping.address())
+        );
+    }
+
+    @Test
+    void shouldKeepBillingAndShippingNullWhenOrderHasNone() {
+        Order order = Order.draft(new CustomerId());
+        order.changePaymentMethod(PaymentMethod.GATEWAY_BALANCE);
+
+        OrderPersistenceEntity orderPersistenceEntity = assembler.fromDomain(order);
+
+        assertThat(orderPersistenceEntity.getBilling()).isNull();
+        assertThat(orderPersistenceEntity.getShipping()).isNull();
+    }
+
+    private void assertAddress(AddressEmbeddable actual, Address expected) {
+        assertThat(actual).satisfies(
+                a -> assertThat(a.getStreet()).isEqualTo(expected.street()),
+                a -> assertThat(a.getNumber()).isEqualTo(expected.number()),
+                a -> assertThat(a.getComplement()).isEqualTo(expected.complement()),
+                a -> assertThat(a.getNeighborhood()).isEqualTo(expected.neighborhood()),
+                a -> assertThat(a.getCity()).isEqualTo(expected.city()),
+                a -> assertThat(a.getState()).isEqualTo(expected.state()),
+                a -> assertThat(a.getZipCode()).isEqualTo(expected.zipCode().value())
         );
     }
 
