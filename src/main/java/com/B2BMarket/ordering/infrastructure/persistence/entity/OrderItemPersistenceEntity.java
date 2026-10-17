@@ -28,7 +28,7 @@ public class OrderItemPersistenceEntity {
     @ManyToOne(optional = false)
     private OrderPersistenceEntity order;
 
-   public Long getorderId() {
+   public Long getOrderId() {
         if(getOrder() == null) {
             return null;
         }
