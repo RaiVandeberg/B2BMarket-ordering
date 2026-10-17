@@ -6,22 +6,29 @@ import com.B2BMarket.ordering.domain.model.valueObject.Document;
 import com.B2BMarket.ordering.domain.model.valueObject.Email;
 import com.B2BMarket.ordering.domain.model.valueObject.FullName;
 import com.B2BMarket.ordering.domain.model.valueObject.Phone;
+import com.B2BMarket.ordering.domain.model.valueObject.ProductName;
 import com.B2BMarket.ordering.domain.model.valueObject.Quantity;
 import com.B2BMarket.ordering.domain.model.valueObject.ZipCode;
 import com.B2BMarket.ordering.domain.model.valueObject.id.OrderId;
+import com.B2BMarket.ordering.domain.model.valueObject.id.OrderItemId;
+import com.B2BMarket.ordering.domain.model.valueObject.id.ProductId;
 import com.B2BMarket.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
 import com.B2BMarket.ordering.infrastructure.persistence.embeddable.BillingEmbeddable;
 import com.B2BMarket.ordering.infrastructure.persistence.embeddable.RecipientEmbeddable;
 import com.B2BMarket.ordering.infrastructure.persistence.embeddable.ShippingEmbeddable;
+import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderItemPersistenceEntity;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderPersistenceEntityTestDataBuilder;
 import com.B2BMarket.ordering.domain.model.entity.Order;
+import com.B2BMarket.ordering.domain.model.entity.OrderItem;
 import com.B2BMarket.ordering.domain.model.valueObject.Money;
 import com.B2BMarket.ordering.domain.model.valueObject.id.CustomerId;
 import com.B2BMarket.ordering.domain.model.entity.OrderStatus;
 import com.B2BMarket.ordering.domain.model.entity.PaymentMethod;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashSet;
 
 class OrderPersistenceEntityDisassemblerTest {
 
@@ -82,6 +89,41 @@ class OrderPersistenceEntityDisassemblerTest {
 
         assertThat(domainEntity.billing()).isNull();
         assertThat(domainEntity.shipping()).isNull();
+    }
+
+    @Test
+    public void shouldConvertItemsFromPersistence() {
+        OrderPersistenceEntity persistenceEntity = OrderPersistenceEntityTestDataBuilder.existingOrder().build();
+        Order domainEntity = disassembler.toDomainEntity(persistenceEntity);
+
+        assertThat(domainEntity.items()).hasSameSizeAs(persistenceEntity.getItems());
+
+        for (OrderItemPersistenceEntity item : persistenceEntity.getItems()) {
+            OrderItem orderItem = domainEntity.items().stream()
+                    .filter(i -> i.id().equals(new OrderItemId(item.getId())))
+                    .findFirst()
+                    .orElseThrow();
+
+            assertThat(orderItem).satisfies(
+                    i -> assertThat(i.orderId()).isEqualTo(new OrderId(persistenceEntity.getId())),
+                    i -> assertThat(i.productId()).isEqualTo(new ProductId(item.getProductId())),
+                    i -> assertThat(i.productName()).isEqualTo(new ProductName(item.getProductName())),
+                    i -> assertThat(i.price()).isEqualTo(new Money(item.getPrice())),
+                    i -> assertThat(i.quantity()).isEqualTo(new Quantity(item.getQuantity())),
+                    i -> assertThat(i.totalAmount()).isEqualTo(new Money(item.getTotalAmount()))
+            );
+        }
+    }
+
+    @Test
+    public void shouldKeepItemsEmptyWhenPersistenceHasNone() {
+        OrderPersistenceEntity persistenceEntity = OrderPersistenceEntityTestDataBuilder.existingOrder()
+                .items(new HashSet<>())
+                .build();
+
+        Order domainEntity = disassembler.toDomainEntity(persistenceEntity);
+
+        assertThat(domainEntity.items()).isEmpty();
     }
 
     private void assertAddress(Address actual, AddressEmbeddable expected) {
