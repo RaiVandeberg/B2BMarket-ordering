@@ -2,6 +2,7 @@ package com.B2BMarket.ordering.infrastructure.persistence.provider;
 
 import com.B2BMarket.ordering.domain.model.entity.Customer;
 import com.B2BMarket.ordering.domain.model.repository.Customers;
+import com.B2BMarket.ordering.domain.model.valueObject.Email;
 import com.B2BMarket.ordering.domain.model.valueObject.id.CustomerId;
 import com.B2BMarket.ordering.infrastructure.persistence.assembler.CustomerPersistenceEntityAssembler;
 import com.B2BMarket.ordering.infrastructure.persistence.disassembler.CustomerPersistenceEntityDisassembler;
@@ -73,5 +74,11 @@ public class CustomersPersistenceProvider implements Customers {
         version.setAccessible(true);
         ReflectionUtils.setField(version, aggregateRoot, persistenceEntity.getVersion());
         version.setAccessible(false);
+    }
+
+    @Override
+    public Optional<Customer> ofEmail(Email email) {
+        return  persistenceEntityRepository.findByEmail(email.value())
+                .map(disassembler::toDomainEntity);
     }
 }

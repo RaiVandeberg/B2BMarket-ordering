@@ -5,9 +5,11 @@ import com.B2BMarket.ordering.domain.model.valueObject.id.CustomerId;
 
 import java.time.LocalDate;
 
+import static com.B2BMarket.ordering.domain.model.entity.CustomerTestDataBuilder.DEFAULT_CUSTOMER_ID;
+
 public class OrderTestDataBuilder {
 
-    private CustomerId customerId = new CustomerId();
+    private CustomerId customerId = DEFAULT_CUSTOMER_ID;
 
     private PaymentMethod paymentMethod = PaymentMethod.GATEWAY_BALANCE;
 

@@ -10,8 +10,11 @@ import com.B2BMarket.ordering.infrastructure.persistence.embeddable.AddressEmbed
 import com.B2BMarket.ordering.infrastructure.persistence.embeddable.BillingEmbeddable;
 import com.B2BMarket.ordering.infrastructure.persistence.embeddable.RecipientEmbeddable;
 import com.B2BMarket.ordering.infrastructure.persistence.embeddable.ShippingEmbeddable;
+import com.B2BMarket.ordering.infrastructure.persistence.entity.CustomerPersistenceEntity;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderItemPersistenceEntity;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
+import com.B2BMarket.ordering.infrastructure.persistence.repository.CustomerPersistenceEntityRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -20,7 +23,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class OrderPersistenceEntityAssembler {
+
+    private final CustomerPersistenceEntityRepository customerPersistenceEntityRepository;
 
     public OrderPersistenceEntity fromDomain(Order order){
         return merge(new OrderPersistenceEntity(), order);
@@ -28,7 +34,6 @@ public class OrderPersistenceEntityAssembler {
 
     public OrderPersistenceEntity merge(OrderPersistenceEntity orderPersistenceEntity, Order order) {
         orderPersistenceEntity.setId(order.id().value().toLong());
-        orderPersistenceEntity.setCustomerId(order.customerId().value());
         orderPersistenceEntity.setTotalAmount(order.totalAmount().value());
         orderPersistenceEntity.setTotalItems(order.totalItems().value());
         orderPersistenceEntity.setStatus(order.status().name());
@@ -42,6 +47,10 @@ public class OrderPersistenceEntityAssembler {
         orderPersistenceEntity.setShipping(assembleShipping(order.shipping()));
         Set<OrderItemPersistenceEntity>mergeItems = mergeItems(order, orderPersistenceEntity);
         orderPersistenceEntity.replaceItems(mergeItems);
+
+        var customerPersistenceEntity = customerPersistenceEntityRepository
+                .getReferenceById(order.customerId().value());
+        orderPersistenceEntity.setCustomer(customerPersistenceEntity);
         return orderPersistenceEntity;
     }
 

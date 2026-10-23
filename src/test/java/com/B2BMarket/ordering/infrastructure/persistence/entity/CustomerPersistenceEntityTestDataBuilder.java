@@ -7,6 +7,8 @@ import com.B2BMarket.ordering.infrastructure.persistence.entity.CustomerPersiste
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
+import static com.B2BMarket.ordering.domain.model.entity.CustomerTestDataBuilder.DEFAULT_CUSTOMER_ID;
+
 public class CustomerPersistenceEntityTestDataBuilder {
 
     private CustomerPersistenceEntityTestDataBuilder() {
@@ -14,7 +16,7 @@ public class CustomerPersistenceEntityTestDataBuilder {
 
     public static CustomerPersistenceEntityBuilder existingCustomer() {
         return CustomerPersistenceEntity.builder()
-                .id(IdGenerator.generateTimeBasedUUID())
+                .id(DEFAULT_CUSTOMER_ID.value())
                 .firstName("John")
                 .lastName("Doe")
                 .birthDate(LocalDate.of(1991, 7, 5))

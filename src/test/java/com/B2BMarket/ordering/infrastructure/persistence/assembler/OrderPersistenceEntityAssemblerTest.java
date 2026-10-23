@@ -2,9 +2,10 @@ package com.B2BMarket.ordering.infrastructure.persistence.assembler;
 
 import com.B2BMarket.ordering.domain.model.entity.OrderItem;
 import com.B2BMarket.ordering.domain.model.entity.OrderTestDataBuilder;
-import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderItemPersistenceEntity;
-import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderPersistenceEntityTestDataBuilder;
+import com.B2BMarket.ordering.infrastructure.persistence.entity.*;
+import com.B2BMarket.ordering.infrastructure.persistence.repository.CustomerPersistenceEntityRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import com.B2BMarket.ordering.domain.model.entity.Order;
 import com.B2BMarket.ordering.domain.model.entity.PaymentMethod;
@@ -13,17 +14,36 @@ import com.B2BMarket.ordering.domain.model.valueObject.BillingInfo;
 import com.B2BMarket.ordering.domain.model.valueObject.Shipping;
 import com.B2BMarket.ordering.domain.model.valueObject.id.CustomerId;
 import com.B2BMarket.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
-import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
 
+@ExtendWith(MockitoExtension.class)
 class OrderPersistenceEntityAssemblerTest {
 
-    private final OrderPersistenceEntityAssembler assembler = new OrderPersistenceEntityAssembler();
+    @Mock
+    private CustomerPersistenceEntityRepository customerPersistenceEntityRepository;
+
+    @InjectMocks
+    private OrderPersistenceEntityAssembler assembler;
+
+    @BeforeEach
+    public void setUp() {
+        Mockito.when(customerPersistenceEntityRepository.getReferenceById(Mockito.any(UUID.class)))
+                .then(a -> {
+                    UUID customerId = a.getArgument(0, UUID.class);
+                    return CustomerPersistenceEntityTestDataBuilder.existingCustomer().id(customerId).build();
+                });
+    }
 
    @Test
     void shouldConvertToDomain() {
