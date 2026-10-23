@@ -132,6 +132,6 @@ class CustomersIT {
     public void shouldReturnEmptyWhenEmailNotFound() {
         Optional<Customer> found = customers.ofEmail(new Email("nonexistent@email.com"));
 
-        assertThat(found).isEmpty();
+        assertThat(found).isNotPresent();
     }
 }
