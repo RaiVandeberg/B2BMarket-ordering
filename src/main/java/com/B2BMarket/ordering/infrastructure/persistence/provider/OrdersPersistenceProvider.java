@@ -2,6 +2,7 @@ package com.B2BMarket.ordering.infrastructure.persistence.provider;
 
 import com.B2BMarket.ordering.domain.model.entity.Order;
 import com.B2BMarket.ordering.domain.model.repository.Orders;
+import com.B2BMarket.ordering.domain.model.valueObject.Money;
 import com.B2BMarket.ordering.domain.model.valueObject.id.CustomerId;
 import com.B2BMarket.ordering.domain.model.valueObject.id.OrderId;
 import com.B2BMarket.ordering.infrastructure.persistence.assembler.OrderPersistenceEntityAssembler;
@@ -65,14 +66,22 @@ public class OrdersPersistenceProvider implements Orders {
 
     @Override
     public List<Order> placedByCustomerInYear(CustomerId customerId, Year year) {
-        OffsetDateTime start = year.atDay(1).atStartOfDay().atOffset(ZoneOffset.UTC);
-        OffsetDateTime end = start.plusYears(1).minusNanos(1);
-        List<OrderPersistenceEntity> entities = persistenceEntityRepository.findByCustomer_IdAndPlacedAtBetween(
+
+        List<OrderPersistenceEntity> entities = persistenceEntityRepository.placedByCustomerInYear(
                 customerId.value(),
-                start,
-                end
+                year.getValue()
         );
         return entities.stream().map(disassembler::toDomainEntity).collect(Collectors.toList());
+    }
+
+    @Override
+    public long salesQuantityByCustomerInYear(CustomerId customerId, Year year) {
+        return this.persistenceEntityRepository.salesQuantityByCustomerInYear(customerId.value(), year.getValue());
+    }
+
+    @Override
+    public Money totalSoldForCustomer(CustomerId customerId) {
+        return new Money(this.persistenceEntityRepository.totalSoldForCustomer(customerId.value()));
     }
 
     private void update(Order aggregateRoot, OrderPersistenceEntity persistenceEntity) {
