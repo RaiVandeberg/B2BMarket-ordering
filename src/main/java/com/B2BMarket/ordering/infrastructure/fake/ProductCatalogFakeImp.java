@@ -1,4 +1,4 @@
-package com.B2BMarket.ordering.infrastructure.persistence.fake;
+package com.B2BMarket.ordering.infrastructure.fake;
 
 import com.B2BMarket.ordering.domain.model.service.ProductCatalogService;
 import com.B2BMarket.ordering.domain.model.valueObject.Money;
