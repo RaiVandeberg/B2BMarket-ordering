@@ -45,4 +45,13 @@ public class ErrorMessages {
     public static final String VALIDATION_ERROR_QUANTITY_MUST_BE_GREATER_THAN_ZERO
             = "Quantity must be greater than zero";
 
+    public static final String ERROR_CANT_ADD_LOYALTY_POINTS_ORDER_IS_NOT_READY
+            = "Can't add loyalty points because the order is not ready";
+
+    public static final String ERROR_CUSTOMER_EMAIL_IS_IN_USE
+            = "Customer email is already in use";
+
+    public static final String ERROR_ORDER_NOT_BELONGS_TO_CUSTOMER
+            = "Order does not belong to this customer";
+
 }
