@@ -26,7 +26,7 @@ public class ShoppingCartPersistenceEntity {
 
     @Id
     @EqualsAndHashCode.Include
-    private Long id;
+    private UUID id;
 
     @JoinColumn
     @ManyToOne(optional = false)
@@ -54,7 +54,7 @@ public class ShoppingCartPersistenceEntity {
     private Set<ShoppingCartItemPersistenceEntity> items = new HashSet<>();
 
     @Builder
-    public ShoppingCartPersistenceEntity(Long id, CustomerPersistenceEntity customer,
+    public ShoppingCartPersistenceEntity(UUID id, CustomerPersistenceEntity customer,
                                          BigDecimal totalAmount, Integer totalItems,
                                          UUID createdByUserId, OffsetDateTime createdAt,
                                          OffsetDateTime lastModifiedAt, UUID lastModifiedByUserId,

@@ -14,7 +14,7 @@ public class ShoppingCartPersistenceEntityTestDataBuilder {
 
     public static ShoppingCartPersistenceEntityBuilder existingShoppingCart() {
         return ShoppingCartPersistenceEntity.builder()
-                .id(IdGenerator.generateTSID().toLong())
+                .id(IdGenerator.generateTimeBasedUUID())
                 .customer(CustomerPersistenceEntityTestDataBuilder.existingCustomer().build())
                 .totalAmount(new BigDecimal("6200"))
                 .totalItems(3)
@@ -27,7 +27,7 @@ public class ShoppingCartPersistenceEntityTestDataBuilder {
 
     public static ShoppingCartItemPersistenceEntity.ShoppingCartItemPersistenceEntityBuilder existingItem() {
         return ShoppingCartItemPersistenceEntity.builder()
-                .id(IdGenerator.generateTSID().toLong())
+                .id(IdGenerator.generateTimeBasedUUID())
                 .productId(IdGenerator.generateTimeBasedUUID())
                 .productName("Notebook X11")
                 .price(new BigDecimal("3000"))
@@ -38,7 +38,7 @@ public class ShoppingCartPersistenceEntityTestDataBuilder {
 
     public static ShoppingCartItemPersistenceEntity.ShoppingCartItemPersistenceEntityBuilder existingItemAlt() {
         return ShoppingCartItemPersistenceEntity.builder()
-                .id(IdGenerator.generateTSID().toLong())
+                .id(IdGenerator.generateTimeBasedUUID())
                 .productId(IdGenerator.generateTimeBasedUUID())
                 .productName("4GB RAM")
                 .price(new BigDecimal("200"))

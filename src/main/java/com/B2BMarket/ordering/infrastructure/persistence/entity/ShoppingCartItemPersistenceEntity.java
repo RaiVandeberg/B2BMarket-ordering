@@ -25,7 +25,7 @@ public class ShoppingCartItemPersistenceEntity {
 
     @Id
     @EqualsAndHashCode.Include
-    private Long id;
+    private UUID id;
 
     private UUID productId;
     private String productName;
@@ -53,7 +53,7 @@ public class ShoppingCartItemPersistenceEntity {
     @Version
     private Long version;
 
-    public Long getShoppingCartId() {
+    public UUID getShoppingCartId() {
         if (getShoppingCart() == null) {
             return null;
         }

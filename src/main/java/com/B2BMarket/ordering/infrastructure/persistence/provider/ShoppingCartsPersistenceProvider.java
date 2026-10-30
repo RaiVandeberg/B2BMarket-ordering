@@ -17,6 +17,7 @@ import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 @Transactional(readOnly = true)
@@ -30,19 +31,19 @@ public class ShoppingCartsPersistenceProvider implements ShoppingCarts {
 
     @Override
     public Optional<ShoppingCart> ofId(ShoppingCartId shoppingCartId) {
-        return persistenceEntityRepository.findById(shoppingCartId.value().toLong())
+        return persistenceEntityRepository.findById(shoppingCartId.value())
                 .map(disassembler::toDomainEntity);
     }
 
     @Override
     public boolean exists(ShoppingCartId shoppingCartId) {
-        return persistenceEntityRepository.existsById(shoppingCartId.value().toLong());
+        return persistenceEntityRepository.existsById(shoppingCartId.value());
     }
 
     @Override
     @Transactional(readOnly = false)
     public void add(ShoppingCart aggregateRoot) {
-        long cartId = aggregateRoot.id().value().toLong();
+        UUID cartId = aggregateRoot.id().value();
 
         persistenceEntityRepository.findById(cartId)
                 .ifPresentOrElse(
@@ -65,13 +66,13 @@ public class ShoppingCartsPersistenceProvider implements ShoppingCarts {
     @Override
     @Transactional(readOnly = false)
     public void remove(ShoppingCart shoppingCart) {
-        persistenceEntityRepository.deleteById(shoppingCart.id().value().toLong());
+        persistenceEntityRepository.deleteById(shoppingCart.id().value());
     }
 
     @Override
     @Transactional(readOnly = false)
     public void remove(ShoppingCartId shoppingCartId) {
-        persistenceEntityRepository.deleteById(shoppingCartId.value().toLong());
+        persistenceEntityRepository.deleteById(shoppingCartId.value());
     }
 
     private void insert(ShoppingCart aggregateRoot) {

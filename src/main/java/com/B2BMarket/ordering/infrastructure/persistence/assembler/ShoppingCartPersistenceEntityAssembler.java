@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
@@ -26,7 +27,7 @@ public class ShoppingCartPersistenceEntityAssembler {
 
     public ShoppingCartPersistenceEntity merge(ShoppingCartPersistenceEntity persistenceEntity,
                                                ShoppingCart shoppingCart) {
-        persistenceEntity.setId(shoppingCart.id().value().toLong());
+        persistenceEntity.setId(shoppingCart.id().value());
         persistenceEntity.setTotalAmount(shoppingCart.totalAmount().value());
         persistenceEntity.setTotalItems(shoppingCart.totalItems().value());
         persistenceEntity.setCreatedAt(shoppingCart.createdAt());
@@ -55,13 +56,13 @@ public class ShoppingCartPersistenceEntityAssembler {
             return newOrUpdateItems.stream().map(this::fromDomain).collect(Collectors.toSet());
         }
 
-        Map<Long, ShoppingCartItemPersistenceEntity> existingMap = existingItems.stream()
+        Map<UUID, ShoppingCartItemPersistenceEntity> existingMap = existingItems.stream()
                 .collect(Collectors.toMap(ShoppingCartItemPersistenceEntity::getId, item -> item));
 
         return newOrUpdateItems.stream()
                 .map(shoppingCartItem -> {
                     ShoppingCartItemPersistenceEntity itemPersistence = existingMap.getOrDefault(
-                            shoppingCartItem.id().value().toLong(), new ShoppingCartItemPersistenceEntity()
+                            shoppingCartItem.id().value(), new ShoppingCartItemPersistenceEntity()
                     );
                     return mergeItem(itemPersistence, shoppingCartItem);
                 }).collect(Collectors.toSet());
@@ -73,7 +74,7 @@ public class ShoppingCartPersistenceEntityAssembler {
 
     private ShoppingCartItemPersistenceEntity mergeItem(ShoppingCartItemPersistenceEntity entity,
                                                         ShoppingCartItem item) {
-        entity.setId(item.id().value().toLong());
+        entity.setId(item.id().value());
         entity.setProductId(item.productId().value());
         entity.setProductName(item.productName().value());
         entity.setPrice(item.price().value());
