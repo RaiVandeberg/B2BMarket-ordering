@@ -54,4 +54,7 @@ public class ErrorMessages {
     public static final String ERROR_ORDER_NOT_BELONGS_TO_CUSTOMER
             = "Order does not belong to this customer";
 
+    public static final String ERROR_SHOPPING_CART_CANT_PROCEED_TO_CHECKOUT
+            = "Shopping cart cannot proceed to checkout, it is empty or contains unavailable items";
+
 }
