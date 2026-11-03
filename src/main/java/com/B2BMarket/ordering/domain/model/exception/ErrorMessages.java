@@ -57,4 +57,10 @@ public class ErrorMessages {
     public static final String ERROR_SHOPPING_CART_CANT_PROCEED_TO_CHECKOUT
             = "Shopping cart cannot proceed to checkout, it is empty or contains unavailable items";
 
+    public static final String ERROR_CUSTOMER_NOT_FOUND
+            = "Customer %s not found";
+
+    public static final String ERROR_CUSTOMER_ALREADY_HAVE_SHOPPING_CART
+            = "Customer %s already has a shopping cart";
+
 }
