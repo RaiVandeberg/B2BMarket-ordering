@@ -1,6 +1,5 @@
 package com.B2BMarket.ordering.infrastructure.persistence.repository;
 
-import com.B2BMarket.ordering.domain.model.valueObject.Money;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.ShoppingCartPersistenceEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -15,7 +14,7 @@ import java.util.UUID;
 public interface ShoppingCartPersistenceEntityRepository extends JpaRepository<ShoppingCartPersistenceEntity, UUID> {
     Optional<ShoppingCartPersistenceEntity> findByCustomer_Id(UUID customerId);
 
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Transactional
     @Query("""
         UPDATE
@@ -28,7 +27,7 @@ public interface ShoppingCartPersistenceEntityRepository extends JpaRepository<S
         """)
     void updateItemPrice(@Param("productId") UUID productId, @Param("price") BigDecimal price);
 
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Transactional
     @Query("""
         UPDATE
@@ -40,7 +39,7 @@ public interface ShoppingCartPersistenceEntityRepository extends JpaRepository<S
         """)
     void updateItemAvailability(@Param("productId") UUID productId, @Param("available") boolean available);
 
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Transactional
     @Query("""
         UPDATE

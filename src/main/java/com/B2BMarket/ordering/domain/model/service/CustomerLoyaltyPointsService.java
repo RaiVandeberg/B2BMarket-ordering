@@ -4,11 +4,13 @@ import com.B2BMarket.ordering.domain.model.entity.Customer;
 import com.B2BMarket.ordering.domain.model.entity.Order;
 import com.B2BMarket.ordering.domain.model.exception.CantAddLoyaltyPointsOrderIsNotReady;
 import com.B2BMarket.ordering.domain.model.exception.OrderNotBelongsToCustomerException;
+import com.B2BMarket.ordering.domain.model.utility.DomainService;
 import com.B2BMarket.ordering.domain.model.valueObject.LoyaltyPoints;
 import com.B2BMarket.ordering.domain.model.valueObject.Money;
 
 import java.util.Objects;
 
+@DomainService()
 public class CustomerLoyaltyPointsService {
 
     private static final LoyaltyPoints basePoints = new LoyaltyPoints(5);

@@ -3,14 +3,16 @@ package com.B2BMarket.ordering.domain.model.service;
 import com.B2BMarket.ordering.domain.model.entity.Customer;
 import com.B2BMarket.ordering.domain.model.exception.CustomerEmailIsUseException;
 import com.B2BMarket.ordering.domain.model.repository.Customers;
+import com.B2BMarket.ordering.domain.model.utility.DomainService;
 import com.B2BMarket.ordering.domain.model.valueObject.*;
 import com.B2BMarket.ordering.domain.model.valueObject.id.CustomerId;
 import lombok.RequiredArgsConstructor;
 
+@DomainService()
 @RequiredArgsConstructor
 public class CustomerRegistrationService {
 
-    private Customers customers;
+    private final Customers customers;
 
     public Customer register(FullName fullName, BirthDate birthDate, Email email,
                              Phone phone, Document document, Boolean promotionNotificationsAllowed,

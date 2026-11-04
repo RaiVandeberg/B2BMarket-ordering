@@ -28,6 +28,11 @@ public class ShoppingCartTestDataBuilder {
         return this;
     }
 
+    public ShoppingCartTestDataBuilder withItems(boolean withItems) {
+        this.withItems = withItems;
+        return this;
+    }
+
     public ShoppingCart build() {
         ShoppingCart cart = ShoppingCart.startShopping(customerId);
 

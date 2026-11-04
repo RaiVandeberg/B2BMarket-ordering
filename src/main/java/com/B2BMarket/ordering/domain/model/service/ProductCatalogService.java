@@ -1,5 +1,6 @@
 package com.B2BMarket.ordering.domain.model.service;
 
+import com.B2BMarket.ordering.domain.model.utility.DomainService;
 import com.B2BMarket.ordering.domain.model.valueObject.Product;
 import com.B2BMarket.ordering.domain.model.valueObject.id.ProductId;
 
