@@ -12,6 +12,7 @@ public class FixedOriginAddressService implements OriginAddressService {
         return Address.builder()
                 .street("Bourbon Street")
                 .neighborhood("North Carolina")
+                .number("100")
                 .city("Burenburg")
                 .state("Berlin")
                 .zipCode(new ZipCode("12345"))

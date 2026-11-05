@@ -2,11 +2,13 @@ package com.B2BMarket.ordering.infrastructure.fake;
 
 import com.B2BMarket.ordering.domain.model.service.ShippingCostService;
 import com.B2BMarket.ordering.domain.model.valueObject.Money;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
 @Component
+@ConditionalOnProperty(name = "B2BMarket.integrations.shipping.provider", havingValue = "FAKE")
 public class ShippingCostServiceFakeImp implements ShippingCostService {
     @Override
     public CalculationResult calculate(CalculationRequest request) {
