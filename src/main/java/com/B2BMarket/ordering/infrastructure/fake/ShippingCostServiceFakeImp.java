@@ -1,7 +1,7 @@
 package com.B2BMarket.ordering.infrastructure.fake;
 
-import com.B2BMarket.ordering.domain.model.service.ShippingCostService;
-import com.B2BMarket.ordering.domain.model.valueObject.Money;
+import com.B2BMarket.ordering.domain.model.commons.Money;
+import com.B2BMarket.ordering.domain.model.order.shipping.ShippingCostService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 

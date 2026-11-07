@@ -1,10 +1,10 @@
 package com.B2BMarket.ordering.infrastructure.fake;
 
-import com.B2BMarket.ordering.domain.model.service.ProductCatalogService;
-import com.B2BMarket.ordering.domain.model.valueObject.Money;
-import com.B2BMarket.ordering.domain.model.valueObject.Product;
-import com.B2BMarket.ordering.domain.model.valueObject.ProductName;
-import com.B2BMarket.ordering.domain.model.valueObject.id.ProductId;
+import com.B2BMarket.ordering.domain.model.commons.Money;
+import com.B2BMarket.ordering.domain.model.product.Product;
+import com.B2BMarket.ordering.domain.model.product.ProductCatalogService;
+import com.B2BMarket.ordering.domain.model.product.ProductId;
+import com.B2BMarket.ordering.domain.model.product.ProductName;
 
 import java.util.Optional;
 

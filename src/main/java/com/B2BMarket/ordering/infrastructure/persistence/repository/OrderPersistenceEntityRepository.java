@@ -1,6 +1,5 @@
 package com.B2BMarket.ordering.infrastructure.persistence.repository;
 
-import com.B2BMarket.ordering.domain.model.valueObject.id.CustomerId;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 

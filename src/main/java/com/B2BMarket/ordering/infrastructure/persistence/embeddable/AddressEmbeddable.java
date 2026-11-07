@@ -1,6 +1,5 @@
 package com.B2BMarket.ordering.infrastructure.persistence.embeddable;
 
-import com.B2BMarket.ordering.domain.model.valueObject.ZipCode;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

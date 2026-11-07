@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Set;
 
-import com.B2BMarket.ordering.domain.model.utility.IdGenerator;
+import com.B2BMarket.ordering.domain.model.IdGenerator;
 
 
 public class OrderPersistenceEntityTestDataBuilder {

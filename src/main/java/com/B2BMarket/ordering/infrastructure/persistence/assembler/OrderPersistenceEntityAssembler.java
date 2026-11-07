@@ -1,11 +1,11 @@
 package com.B2BMarket.ordering.infrastructure.persistence.assembler;
 
-import com.B2BMarket.ordering.domain.model.entity.Order;
-import com.B2BMarket.ordering.domain.model.entity.OrderItem;
-import com.B2BMarket.ordering.domain.model.valueObject.Address;
-import com.B2BMarket.ordering.domain.model.valueObject.BillingInfo;
-import com.B2BMarket.ordering.domain.model.valueObject.Recipient;
-import com.B2BMarket.ordering.domain.model.valueObject.Shipping;
+import com.B2BMarket.ordering.domain.model.commons.Address;
+import com.B2BMarket.ordering.domain.model.order.BillingInfo;
+import com.B2BMarket.ordering.domain.model.order.Order;
+import com.B2BMarket.ordering.domain.model.order.OrderItem;
+import com.B2BMarket.ordering.domain.model.order.Recipient;
+import com.B2BMarket.ordering.domain.model.order.Shipping;
 import com.B2BMarket.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
 import com.B2BMarket.ordering.infrastructure.persistence.embeddable.BillingEmbeddable;
 import com.B2BMarket.ordering.infrastructure.persistence.embeddable.RecipientEmbeddable;

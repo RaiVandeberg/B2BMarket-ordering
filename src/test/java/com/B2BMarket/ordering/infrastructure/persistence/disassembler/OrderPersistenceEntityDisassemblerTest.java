@@ -1,17 +1,23 @@
 package com.B2BMarket.ordering.infrastructure.persistence.disassembler;
 
 
-import com.B2BMarket.ordering.domain.model.valueObject.Address;
-import com.B2BMarket.ordering.domain.model.valueObject.Document;
-import com.B2BMarket.ordering.domain.model.valueObject.Email;
-import com.B2BMarket.ordering.domain.model.valueObject.FullName;
-import com.B2BMarket.ordering.domain.model.valueObject.Phone;
-import com.B2BMarket.ordering.domain.model.valueObject.ProductName;
-import com.B2BMarket.ordering.domain.model.valueObject.Quantity;
-import com.B2BMarket.ordering.domain.model.valueObject.ZipCode;
-import com.B2BMarket.ordering.domain.model.valueObject.id.OrderId;
-import com.B2BMarket.ordering.domain.model.valueObject.id.OrderItemId;
-import com.B2BMarket.ordering.domain.model.valueObject.id.ProductId;
+import com.B2BMarket.ordering.domain.model.commons.Address;
+import com.B2BMarket.ordering.domain.model.commons.Document;
+import com.B2BMarket.ordering.domain.model.commons.Email;
+import com.B2BMarket.ordering.domain.model.commons.FullName;
+import com.B2BMarket.ordering.domain.model.commons.Money;
+import com.B2BMarket.ordering.domain.model.commons.Phone;
+import com.B2BMarket.ordering.domain.model.commons.Quantity;
+import com.B2BMarket.ordering.domain.model.commons.ZipCode;
+import com.B2BMarket.ordering.domain.model.customer.CustomerId;
+import com.B2BMarket.ordering.domain.model.order.Order;
+import com.B2BMarket.ordering.domain.model.order.OrderId;
+import com.B2BMarket.ordering.domain.model.order.OrderItem;
+import com.B2BMarket.ordering.domain.model.order.OrderItemId;
+import com.B2BMarket.ordering.domain.model.order.OrderStatus;
+import com.B2BMarket.ordering.domain.model.order.PaymentMethod;
+import com.B2BMarket.ordering.domain.model.product.ProductId;
+import com.B2BMarket.ordering.domain.model.product.ProductName;
 import com.B2BMarket.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
 import com.B2BMarket.ordering.infrastructure.persistence.embeddable.BillingEmbeddable;
 import com.B2BMarket.ordering.infrastructure.persistence.embeddable.RecipientEmbeddable;
@@ -19,12 +25,6 @@ import com.B2BMarket.ordering.infrastructure.persistence.embeddable.ShippingEmbe
 import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderItemPersistenceEntity;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderPersistenceEntityTestDataBuilder;
-import com.B2BMarket.ordering.domain.model.entity.Order;
-import com.B2BMarket.ordering.domain.model.entity.OrderItem;
-import com.B2BMarket.ordering.domain.model.valueObject.Money;
-import com.B2BMarket.ordering.domain.model.valueObject.id.CustomerId;
-import com.B2BMarket.ordering.domain.model.entity.OrderStatus;
-import com.B2BMarket.ordering.domain.model.entity.PaymentMethod;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 

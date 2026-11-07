@@ -1,10 +1,10 @@
 package com.B2BMarket.ordering.infrastructure.persistence.provider;
 
-import com.B2BMarket.ordering.domain.model.entity.Order;
-import com.B2BMarket.ordering.domain.model.repository.Orders;
-import com.B2BMarket.ordering.domain.model.valueObject.Money;
-import com.B2BMarket.ordering.domain.model.valueObject.id.CustomerId;
-import com.B2BMarket.ordering.domain.model.valueObject.id.OrderId;
+import com.B2BMarket.ordering.domain.model.commons.Money;
+import com.B2BMarket.ordering.domain.model.customer.CustomerId;
+import com.B2BMarket.ordering.domain.model.order.Order;
+import com.B2BMarket.ordering.domain.model.order.OrderId;
+import com.B2BMarket.ordering.domain.model.order.Orders;
 import com.B2BMarket.ordering.infrastructure.persistence.assembler.OrderPersistenceEntityAssembler;
 import com.B2BMarket.ordering.infrastructure.persistence.disassembler.OrderPersistenceEntityDisassembler;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;

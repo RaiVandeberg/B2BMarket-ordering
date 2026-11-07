@@ -1,9 +1,9 @@
 package com.B2BMarket.ordering.infrastructure.persistence.assembler;
 
-import com.B2BMarket.ordering.domain.model.entity.Customer;
-import com.B2BMarket.ordering.domain.model.entity.CustomerTestDataBuilder;
-import com.B2BMarket.ordering.domain.model.valueObject.Email;
-import com.B2BMarket.ordering.domain.model.valueObject.FullName;
+import com.B2BMarket.ordering.domain.model.commons.Email;
+import com.B2BMarket.ordering.domain.model.commons.FullName;
+import com.B2BMarket.ordering.domain.model.customer.Customer;
+import com.B2BMarket.ordering.domain.model.customer.CustomerTestDataBuilder;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.CustomerPersistenceEntity;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.CustomerPersistenceEntityTestDataBuilder;
 import org.junit.jupiter.api.Test;

@@ -1,13 +1,12 @@
 package com.B2BMarket.ordering.infrastructure.persistence.entity;
 
-import com.B2BMarket.ordering.domain.model.utility.IdGenerator;
 import com.B2BMarket.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.CustomerPersistenceEntity.CustomerPersistenceEntityBuilder;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
-import static com.B2BMarket.ordering.domain.model.entity.CustomerTestDataBuilder.DEFAULT_CUSTOMER_ID;
+import static com.B2BMarket.ordering.domain.model.customer.CustomerTestDataBuilder.DEFAULT_CUSTOMER_ID;
 
 public class CustomerPersistenceEntityTestDataBuilder {
 

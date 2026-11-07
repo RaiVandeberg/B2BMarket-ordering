@@ -1,9 +1,9 @@
 package com.B2BMarket.ordering.infrastructure.persistence.provider;
 
-import com.B2BMarket.ordering.domain.model.entity.ShoppingCart;
-import com.B2BMarket.ordering.domain.model.repository.ShoppingCarts;
-import com.B2BMarket.ordering.domain.model.valueObject.id.CustomerId;
-import com.B2BMarket.ordering.domain.model.valueObject.id.ShoppingCartId;
+import com.B2BMarket.ordering.domain.model.customer.CustomerId;
+import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCart;
+import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartId;
+import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCarts;
 import com.B2BMarket.ordering.infrastructure.persistence.assembler.ShoppingCartPersistenceEntityAssembler;
 import com.B2BMarket.ordering.infrastructure.persistence.disassembler.ShoppingCartPersistenceEntityDisassembler;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.ShoppingCartPersistenceEntity;

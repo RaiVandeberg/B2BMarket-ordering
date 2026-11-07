@@ -1,18 +1,18 @@
 package com.B2BMarket.ordering.infrastructure.persistence.assembler;
 
-import com.B2BMarket.ordering.domain.model.entity.OrderItem;
-import com.B2BMarket.ordering.domain.model.entity.OrderTestDataBuilder;
+import com.B2BMarket.ordering.domain.model.commons.Address;
+import com.B2BMarket.ordering.domain.model.customer.CustomerId;
+import com.B2BMarket.ordering.domain.model.order.BillingInfo;
+import com.B2BMarket.ordering.domain.model.order.Order;
+import com.B2BMarket.ordering.domain.model.order.OrderItem;
+import com.B2BMarket.ordering.domain.model.order.OrderTestDataBuilder;
+import com.B2BMarket.ordering.domain.model.order.PaymentMethod;
+import com.B2BMarket.ordering.domain.model.order.Shipping;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.*;
 import com.B2BMarket.ordering.infrastructure.persistence.repository.CustomerPersistenceEntityRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import com.B2BMarket.ordering.domain.model.entity.Order;
-import com.B2BMarket.ordering.domain.model.entity.PaymentMethod;
-import com.B2BMarket.ordering.domain.model.valueObject.Address;
-import com.B2BMarket.ordering.domain.model.valueObject.BillingInfo;
-import com.B2BMarket.ordering.domain.model.valueObject.Shipping;
-import com.B2BMarket.ordering.domain.model.valueObject.id.CustomerId;
 import com.B2BMarket.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

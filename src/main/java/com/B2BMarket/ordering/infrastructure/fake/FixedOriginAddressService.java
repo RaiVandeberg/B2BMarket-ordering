@@ -1,8 +1,8 @@
 package com.B2BMarket.ordering.infrastructure.fake;
 
-import com.B2BMarket.ordering.domain.model.service.OriginAddressService;
-import com.B2BMarket.ordering.domain.model.valueObject.Address;
-import com.B2BMarket.ordering.domain.model.valueObject.ZipCode;
+import com.B2BMarket.ordering.domain.model.commons.Address;
+import com.B2BMarket.ordering.domain.model.commons.ZipCode;
+import com.B2BMarket.ordering.domain.model.order.shipping.OriginAddressService;
 import org.springframework.stereotype.Component;
 
 @Component

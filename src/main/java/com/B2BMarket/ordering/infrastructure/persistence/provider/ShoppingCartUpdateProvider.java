@@ -1,9 +1,8 @@
 package com.B2BMarket.ordering.infrastructure.persistence.provider;
 
-import com.B2BMarket.ordering.domain.model.service.ShoppingCartProductAdjustmentService;
-import com.B2BMarket.ordering.domain.model.valueObject.Money;
-import com.B2BMarket.ordering.domain.model.valueObject.Product;
-import com.B2BMarket.ordering.domain.model.valueObject.id.ProductId;
+import com.B2BMarket.ordering.domain.model.commons.Money;
+import com.B2BMarket.ordering.domain.model.product.ProductId;
+import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartProductAdjustmentService;
 import com.B2BMarket.ordering.infrastructure.persistence.repository.ShoppingCartPersistenceEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

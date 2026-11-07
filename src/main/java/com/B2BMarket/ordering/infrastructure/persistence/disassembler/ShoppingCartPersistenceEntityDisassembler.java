@@ -1,14 +1,14 @@
 package com.B2BMarket.ordering.infrastructure.persistence.disassembler;
 
-import com.B2BMarket.ordering.domain.model.entity.ShoppingCart;
-import com.B2BMarket.ordering.domain.model.entity.ShoppingCartItem;
-import com.B2BMarket.ordering.domain.model.valueObject.Money;
-import com.B2BMarket.ordering.domain.model.valueObject.ProductName;
-import com.B2BMarket.ordering.domain.model.valueObject.Quantity;
-import com.B2BMarket.ordering.domain.model.valueObject.id.CustomerId;
-import com.B2BMarket.ordering.domain.model.valueObject.id.ProductId;
-import com.B2BMarket.ordering.domain.model.valueObject.id.ShoppingCartId;
-import com.B2BMarket.ordering.domain.model.valueObject.id.ShoppingCartItemId;
+import com.B2BMarket.ordering.domain.model.commons.Money;
+import com.B2BMarket.ordering.domain.model.commons.Quantity;
+import com.B2BMarket.ordering.domain.model.customer.CustomerId;
+import com.B2BMarket.ordering.domain.model.product.ProductId;
+import com.B2BMarket.ordering.domain.model.product.ProductName;
+import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCart;
+import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartId;
+import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartItem;
+import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartItemId;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.ShoppingCartItemPersistenceEntity;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.ShoppingCartPersistenceEntity;
 import org.springframework.stereotype.Component;

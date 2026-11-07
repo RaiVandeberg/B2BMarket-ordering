@@ -1,8 +1,14 @@
 package com.B2BMarket.ordering.infrastructure.persistence.disassembler;
 
-import com.B2BMarket.ordering.domain.model.entity.Customer;
-import com.B2BMarket.ordering.domain.model.valueObject.*;
-import com.B2BMarket.ordering.domain.model.valueObject.id.CustomerId;
+import com.B2BMarket.ordering.domain.model.commons.Document;
+import com.B2BMarket.ordering.domain.model.commons.Email;
+import com.B2BMarket.ordering.domain.model.commons.FullName;
+import com.B2BMarket.ordering.domain.model.commons.Phone;
+import com.B2BMarket.ordering.domain.model.commons.ZipCode;
+import com.B2BMarket.ordering.domain.model.customer.BirthDate;
+import com.B2BMarket.ordering.domain.model.customer.Customer;
+import com.B2BMarket.ordering.domain.model.customer.CustomerId;
+import com.B2BMarket.ordering.domain.model.customer.LoyaltyPoints;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.CustomerPersistenceEntity;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.CustomerPersistenceEntityTestDataBuilder;
 import org.junit.jupiter.api.Test;

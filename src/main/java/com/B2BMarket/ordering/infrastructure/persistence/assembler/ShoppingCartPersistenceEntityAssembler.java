@@ -1,7 +1,7 @@
 package com.B2BMarket.ordering.infrastructure.persistence.assembler;
 
-import com.B2BMarket.ordering.domain.model.entity.ShoppingCart;
-import com.B2BMarket.ordering.domain.model.entity.ShoppingCartItem;
+import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCart;
+import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartItem;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.CustomerPersistenceEntity;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.ShoppingCartItemPersistenceEntity;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.ShoppingCartPersistenceEntity;

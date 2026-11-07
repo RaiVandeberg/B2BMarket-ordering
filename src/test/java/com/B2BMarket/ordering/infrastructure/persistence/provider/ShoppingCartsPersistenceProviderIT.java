@@ -1,11 +1,11 @@
 package com.B2BMarket.ordering.infrastructure.persistence.provider;
 
-import com.B2BMarket.ordering.domain.model.entity.Customer;
-import com.B2BMarket.ordering.domain.model.entity.CustomerTestDataBuilder;
-import com.B2BMarket.ordering.domain.model.entity.ShoppingCart;
-import com.B2BMarket.ordering.domain.model.entity.ShoppingCartTestDataBuilder;
-import com.B2BMarket.ordering.domain.model.valueObject.Quantity;
-import com.B2BMarket.ordering.domain.model.valueObject.id.CustomerId;
+import com.B2BMarket.ordering.domain.model.commons.Quantity;
+import com.B2BMarket.ordering.domain.model.customer.Customer;
+import com.B2BMarket.ordering.domain.model.customer.CustomerId;
+import com.B2BMarket.ordering.domain.model.customer.CustomerTestDataBuilder;
+import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCart;
+import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartTestDataBuilder;
 import com.B2BMarket.ordering.infrastructure.persistence.assembler.CustomerPersistenceEntityAssembler;
 import com.B2BMarket.ordering.infrastructure.persistence.assembler.ShoppingCartPersistenceEntityAssembler;
 import com.B2BMarket.ordering.infrastructure.persistence.config.SpringDataAuditingConfig;
@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.B2BMarket.ordering.domain.model.entity.ProductTestDataBuilder.aProductAltMousePad;
+import static com.B2BMarket.ordering.domain.model.product.ProductTestDataBuilder.aProductAltMousePad;
 
 @DataJpaTest
 @Import({

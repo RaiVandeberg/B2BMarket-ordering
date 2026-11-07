@@ -1,7 +1,7 @@
 package com.B2BMarket.ordering.infrastructure.persistence.assembler;
 
-import com.B2BMarket.ordering.domain.model.entity.Customer;
-import com.B2BMarket.ordering.domain.model.valueObject.Address;
+import com.B2BMarket.ordering.domain.model.commons.Address;
+import com.B2BMarket.ordering.domain.model.customer.Customer;
 import com.B2BMarket.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.CustomerPersistenceEntity;
 import org.springframework.stereotype.Component;

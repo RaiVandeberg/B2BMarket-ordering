@@ -1,9 +1,9 @@
 package com.B2BMarket.ordering.infrastructure.persistence.provider;
 
-import com.B2BMarket.ordering.domain.model.entity.Customer;
-import com.B2BMarket.ordering.domain.model.entity.CustomerTestDataBuilder;
-import com.B2BMarket.ordering.domain.model.valueObject.Email;
-import com.B2BMarket.ordering.domain.model.valueObject.LoyaltyPoints;
+import com.B2BMarket.ordering.domain.model.commons.Email;
+import com.B2BMarket.ordering.domain.model.customer.Customer;
+import com.B2BMarket.ordering.domain.model.customer.CustomerTestDataBuilder;
+import com.B2BMarket.ordering.domain.model.customer.LoyaltyPoints;
 import com.B2BMarket.ordering.infrastructure.persistence.assembler.CustomerPersistenceEntityAssembler;
 import com.B2BMarket.ordering.infrastructure.persistence.config.SpringDataAuditingConfig;
 import com.B2BMarket.ordering.infrastructure.persistence.disassembler.CustomerPersistenceEntityDisassembler;

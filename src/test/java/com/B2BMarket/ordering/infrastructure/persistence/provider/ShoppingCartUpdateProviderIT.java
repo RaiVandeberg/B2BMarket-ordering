@@ -1,10 +1,14 @@
 package com.B2BMarket.ordering.infrastructure.persistence.provider;
 
-import com.B2BMarket.ordering.domain.model.entity.*;
-import com.B2BMarket.ordering.domain.model.valueObject.Money;
-import com.B2BMarket.ordering.domain.model.valueObject.Product;
-import com.B2BMarket.ordering.domain.model.valueObject.Quantity;
-import com.B2BMarket.ordering.domain.model.valueObject.id.ProductId;
+import com.B2BMarket.ordering.domain.model.commons.Money;
+import com.B2BMarket.ordering.domain.model.commons.Quantity;
+import com.B2BMarket.ordering.domain.model.customer.CustomerTestDataBuilder;
+import com.B2BMarket.ordering.domain.model.product.Product;
+import com.B2BMarket.ordering.domain.model.product.ProductId;
+import com.B2BMarket.ordering.domain.model.product.ProductTestDataBuilder;
+import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCart;
+import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartItem;
+import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartTestDataBuilder;
 import com.B2BMarket.ordering.infrastructure.persistence.assembler.CustomerPersistenceEntityAssembler;
 import com.B2BMarket.ordering.infrastructure.persistence.assembler.ShoppingCartPersistenceEntityAssembler;
 import com.B2BMarket.ordering.infrastructure.persistence.config.SpringDataAuditingConfig;
