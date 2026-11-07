@@ -1,6 +1,6 @@
 package com.B2BMarket.ordering.infrastructure.persistence.customer;
 
-import com.B2BMarket.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
+import com.B2BMarket.ordering.infrastructure.persistence.commons.AddressEmbeddable;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedBy;

@@ -1,7 +1,7 @@
 package com.B2BMarket.ordering.infrastructure.persistence.order;
 
 import com.B2BMarket.ordering.domain.model.customer.CustomerTestDataBuilder;
-import com.B2BMarket.ordering.infrastructure.persistence.config.SpringDataAuditingConfig;
+import com.B2BMarket.ordering.infrastructure.persistence.SpringDataAuditingConfig;
 import com.B2BMarket.ordering.infrastructure.persistence.customer.CustomerPersistenceEntity;
 import com.B2BMarket.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityRepository;
 import com.B2BMarket.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityTestDataBuilder;

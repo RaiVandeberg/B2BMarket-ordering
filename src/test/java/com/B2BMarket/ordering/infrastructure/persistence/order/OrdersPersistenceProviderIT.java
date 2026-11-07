@@ -4,7 +4,7 @@ import com.B2BMarket.ordering.domain.model.customer.CustomerTestDataBuilder;
 import com.B2BMarket.ordering.domain.model.order.Order;
 import com.B2BMarket.ordering.domain.model.order.OrderStatus;
 import com.B2BMarket.ordering.domain.model.order.OrderTestDataBuilder;
-import com.B2BMarket.ordering.infrastructure.persistence.config.SpringDataAuditingConfig;
+import com.B2BMarket.ordering.infrastructure.persistence.SpringDataAuditingConfig;
 import com.B2BMarket.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityAssembler;
 import com.B2BMarket.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityDisassembler;
 import com.B2BMarket.ordering.infrastructure.persistence.customer.CustomersPersistenceProvider;

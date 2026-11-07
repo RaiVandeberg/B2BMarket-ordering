@@ -20,7 +20,7 @@ import com.B2BMarket.ordering.domain.model.order.Recipient;
 import com.B2BMarket.ordering.domain.model.order.Shipping;
 import com.B2BMarket.ordering.domain.model.product.ProductId;
 import com.B2BMarket.ordering.domain.model.product.ProductName;
-import com.B2BMarket.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
+import com.B2BMarket.ordering.infrastructure.persistence.commons.AddressEmbeddable;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;

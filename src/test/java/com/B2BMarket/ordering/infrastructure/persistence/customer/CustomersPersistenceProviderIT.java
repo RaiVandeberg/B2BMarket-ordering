@@ -4,7 +4,7 @@ import com.B2BMarket.ordering.domain.model.commons.Email;
 import com.B2BMarket.ordering.domain.model.customer.Customer;
 import com.B2BMarket.ordering.domain.model.customer.CustomerTestDataBuilder;
 import com.B2BMarket.ordering.domain.model.customer.LoyaltyPoints;
-import com.B2BMarket.ordering.infrastructure.persistence.config.SpringDataAuditingConfig;
+import com.B2BMarket.ordering.infrastructure.persistence.SpringDataAuditingConfig;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

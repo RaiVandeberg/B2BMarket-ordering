@@ -9,7 +9,7 @@ import com.B2BMarket.ordering.domain.model.product.ProductTestDataBuilder;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCart;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartItem;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartTestDataBuilder;
-import com.B2BMarket.ordering.infrastructure.persistence.config.SpringDataAuditingConfig;
+import com.B2BMarket.ordering.infrastructure.persistence.SpringDataAuditingConfig;
 import com.B2BMarket.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityAssembler;
 import com.B2BMarket.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityDisassembler;
 import com.B2BMarket.ordering.infrastructure.persistence.customer.CustomersPersistenceProvider;

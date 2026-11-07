@@ -6,8 +6,8 @@ import com.B2BMarket.ordering.domain.model.order.Order;
 import com.B2BMarket.ordering.domain.model.order.OrderItem;
 import com.B2BMarket.ordering.domain.model.order.Recipient;
 import com.B2BMarket.ordering.domain.model.order.Shipping;
+import com.B2BMarket.ordering.infrastructure.persistence.commons.AddressEmbeddable;
 import com.B2BMarket.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityRepository;
-import com.B2BMarket.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

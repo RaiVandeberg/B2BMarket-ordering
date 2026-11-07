@@ -10,7 +10,7 @@ import com.B2BMarket.ordering.domain.model.customer.BirthDate;
 import com.B2BMarket.ordering.domain.model.customer.Customer;
 import com.B2BMarket.ordering.domain.model.customer.CustomerId;
 import com.B2BMarket.ordering.domain.model.customer.LoyaltyPoints;
-import com.B2BMarket.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
+import com.B2BMarket.ordering.infrastructure.persistence.commons.AddressEmbeddable;
 import org.springframework.stereotype.Component;
 
 @Component

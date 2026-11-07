@@ -1,6 +1,6 @@
 package com.B2BMarket.ordering.infrastructure.persistence.customer;
 
-import com.B2BMarket.ordering.infrastructure.persistence.config.SpringDataAuditingConfig;
+import com.B2BMarket.ordering.infrastructure.persistence.SpringDataAuditingConfig;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

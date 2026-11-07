@@ -1,7 +1,7 @@
 package com.B2BMarket.ordering.infrastructure.persistence.customer;
 
+import com.B2BMarket.ordering.infrastructure.persistence.commons.AddressEmbeddable;
 import com.B2BMarket.ordering.infrastructure.persistence.customer.CustomerPersistenceEntity.CustomerPersistenceEntityBuilder;
-import com.B2BMarket.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;

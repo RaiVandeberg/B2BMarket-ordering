@@ -18,7 +18,7 @@ import com.B2BMarket.ordering.domain.model.order.OrderStatus;
 import com.B2BMarket.ordering.domain.model.order.PaymentMethod;
 import com.B2BMarket.ordering.domain.model.product.ProductId;
 import com.B2BMarket.ordering.domain.model.product.ProductName;
-import com.B2BMarket.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
+import com.B2BMarket.ordering.infrastructure.persistence.commons.AddressEmbeddable;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 

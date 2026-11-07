@@ -1,5 +1,5 @@
 package com.B2BMarket.ordering.infrastructure.persistence.order;
-import com.B2BMarket.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
+import com.B2BMarket.ordering.infrastructure.persistence.commons.AddressEmbeddable;
 
 
 import jakarta.persistence.Embeddable;
