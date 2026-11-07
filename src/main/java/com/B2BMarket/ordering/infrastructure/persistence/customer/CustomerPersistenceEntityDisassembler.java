@@ -1,4 +1,4 @@
-package com.B2BMarket.ordering.infrastructure.persistence.disassembler;
+package com.B2BMarket.ordering.infrastructure.persistence.customer;
 
 import com.B2BMarket.ordering.domain.model.commons.Address;
 import com.B2BMarket.ordering.domain.model.commons.Document;
@@ -11,7 +11,6 @@ import com.B2BMarket.ordering.domain.model.customer.Customer;
 import com.B2BMarket.ordering.domain.model.customer.CustomerId;
 import com.B2BMarket.ordering.domain.model.customer.LoyaltyPoints;
 import com.B2BMarket.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
-import com.B2BMarket.ordering.infrastructure.persistence.entity.CustomerPersistenceEntity;
 import org.springframework.stereotype.Component;
 
 @Component

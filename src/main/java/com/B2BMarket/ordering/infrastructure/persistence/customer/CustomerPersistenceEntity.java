@@ -1,4 +1,4 @@
-package com.B2BMarket.ordering.infrastructure.persistence.entity;
+package com.B2BMarket.ordering.infrastructure.persistence.customer;
 
 import com.B2BMarket.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
 import jakarta.persistence.*;

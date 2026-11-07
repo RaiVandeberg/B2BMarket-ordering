@@ -1,4 +1,5 @@
-package com.B2BMarket.ordering.infrastructure.persistence.entity;
+package com.B2BMarket.ordering.infrastructure.persistence.shoppingcart;
+import com.B2BMarket.ordering.infrastructure.persistence.customer.CustomerPersistenceEntity;
 
 import jakarta.persistence.*;
 import lombok.*;

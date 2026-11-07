@@ -1,5 +1,6 @@
-package com.B2BMarket.ordering.infrastructure.persistence.entity;
-import com.B2BMarket.ordering.infrastructure.persistence.entity.ShoppingCartPersistenceEntity.ShoppingCartPersistenceEntityBuilder;
+package com.B2BMarket.ordering.infrastructure.persistence.shoppingcart;
+import com.B2BMarket.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityTestDataBuilder;
+import com.B2BMarket.ordering.infrastructure.persistence.shoppingcart.ShoppingCartPersistenceEntity.ShoppingCartPersistenceEntityBuilder;
 
 import com.B2BMarket.ordering.domain.model.IdGenerator;
 

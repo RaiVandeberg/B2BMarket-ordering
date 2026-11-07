@@ -1,4 +1,4 @@
-package com.B2BMarket.ordering.infrastructure.persistence.disassembler;
+package com.B2BMarket.ordering.infrastructure.persistence.shoppingcart;
 
 import com.B2BMarket.ordering.domain.model.commons.Money;
 import com.B2BMarket.ordering.domain.model.commons.Quantity;
@@ -9,8 +9,6 @@ import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCart;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartId;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartItem;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartItemId;
-import com.B2BMarket.ordering.infrastructure.persistence.entity.ShoppingCartItemPersistenceEntity;
-import com.B2BMarket.ordering.infrastructure.persistence.entity.ShoppingCartPersistenceEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;

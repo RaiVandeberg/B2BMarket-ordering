@@ -1,4 +1,4 @@
-package com.B2BMarket.ordering.infrastructure.persistence.provider;
+package com.B2BMarket.ordering.infrastructure.persistence.shoppingcart;
 
 import com.B2BMarket.ordering.domain.model.commons.Money;
 import com.B2BMarket.ordering.domain.model.commons.Quantity;
@@ -9,12 +9,10 @@ import com.B2BMarket.ordering.domain.model.product.ProductTestDataBuilder;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCart;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartItem;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartTestDataBuilder;
-import com.B2BMarket.ordering.infrastructure.persistence.assembler.CustomerPersistenceEntityAssembler;
-import com.B2BMarket.ordering.infrastructure.persistence.assembler.ShoppingCartPersistenceEntityAssembler;
 import com.B2BMarket.ordering.infrastructure.persistence.config.SpringDataAuditingConfig;
-import com.B2BMarket.ordering.infrastructure.persistence.disassembler.CustomerPersistenceEntityDisassembler;
-import com.B2BMarket.ordering.infrastructure.persistence.disassembler.ShoppingCartPersistenceEntityDisassembler;
-import com.B2BMarket.ordering.infrastructure.persistence.repository.ShoppingCartPersistenceEntityRepository;
+import com.B2BMarket.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityAssembler;
+import com.B2BMarket.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityDisassembler;
+import com.B2BMarket.ordering.infrastructure.persistence.customer.CustomersPersistenceProvider;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

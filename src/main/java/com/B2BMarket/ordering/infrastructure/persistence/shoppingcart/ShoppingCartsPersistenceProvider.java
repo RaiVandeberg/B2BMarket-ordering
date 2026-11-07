@@ -1,13 +1,9 @@
-package com.B2BMarket.ordering.infrastructure.persistence.provider;
+package com.B2BMarket.ordering.infrastructure.persistence.shoppingcart;
 
 import com.B2BMarket.ordering.domain.model.customer.CustomerId;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCart;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartId;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCarts;
-import com.B2BMarket.ordering.infrastructure.persistence.assembler.ShoppingCartPersistenceEntityAssembler;
-import com.B2BMarket.ordering.infrastructure.persistence.disassembler.ShoppingCartPersistenceEntityDisassembler;
-import com.B2BMarket.ordering.infrastructure.persistence.entity.ShoppingCartPersistenceEntity;
-import com.B2BMarket.ordering.infrastructure.persistence.repository.ShoppingCartPersistenceEntityRepository;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;

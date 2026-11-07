@@ -1,6 +1,6 @@
 package com.B2BMarket.ordering.infrastructure.persistence.order;
 
-import com.B2BMarket.ordering.infrastructure.persistence.entity.CustomerPersistenceEntity;
+import com.B2BMarket.ordering.infrastructure.persistence.customer.CustomerPersistenceEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedBy;

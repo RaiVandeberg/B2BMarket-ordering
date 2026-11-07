@@ -1,9 +1,9 @@
 package com.B2BMarket.ordering.domain.model.customer;
 
 import com.B2BMarket.ordering.domain.model.commons.Email;
-import com.B2BMarket.ordering.infrastructure.persistence.assembler.CustomerPersistenceEntityAssembler;
-import com.B2BMarket.ordering.infrastructure.persistence.disassembler.CustomerPersistenceEntityDisassembler;
-import com.B2BMarket.ordering.infrastructure.persistence.provider.CustomersPersistenceProvider;
+import com.B2BMarket.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityAssembler;
+import com.B2BMarket.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityDisassembler;
+import com.B2BMarket.ordering.infrastructure.persistence.customer.CustomersPersistenceProvider;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

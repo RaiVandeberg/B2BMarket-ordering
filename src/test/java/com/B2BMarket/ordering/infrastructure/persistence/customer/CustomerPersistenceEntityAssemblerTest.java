@@ -1,11 +1,9 @@
-package com.B2BMarket.ordering.infrastructure.persistence.assembler;
+package com.B2BMarket.ordering.infrastructure.persistence.customer;
 
 import com.B2BMarket.ordering.domain.model.commons.Email;
 import com.B2BMarket.ordering.domain.model.commons.FullName;
 import com.B2BMarket.ordering.domain.model.customer.Customer;
 import com.B2BMarket.ordering.domain.model.customer.CustomerTestDataBuilder;
-import com.B2BMarket.ordering.infrastructure.persistence.entity.CustomerPersistenceEntity;
-import com.B2BMarket.ordering.infrastructure.persistence.entity.CustomerPersistenceEntityTestDataBuilder;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
