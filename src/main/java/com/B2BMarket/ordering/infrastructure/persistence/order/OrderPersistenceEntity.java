@@ -1,7 +1,6 @@
-package com.B2BMarket.ordering.infrastructure.persistence.entity;
+package com.B2BMarket.ordering.infrastructure.persistence.order;
 
-import com.B2BMarket.ordering.infrastructure.persistence.embeddable.BillingEmbeddable;
-import com.B2BMarket.ordering.infrastructure.persistence.embeddable.ShippingEmbeddable;
+import com.B2BMarket.ordering.infrastructure.persistence.entity.CustomerPersistenceEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedBy;

@@ -1,16 +1,13 @@
-package com.B2BMarket.ordering.infrastructure.persistence.provider;
+package com.B2BMarket.ordering.infrastructure.persistence.order;
 
 import com.B2BMarket.ordering.domain.model.customer.CustomerTestDataBuilder;
 import com.B2BMarket.ordering.domain.model.order.Order;
 import com.B2BMarket.ordering.domain.model.order.OrderStatus;
 import com.B2BMarket.ordering.domain.model.order.OrderTestDataBuilder;
 import com.B2BMarket.ordering.infrastructure.persistence.assembler.CustomerPersistenceEntityAssembler;
-import com.B2BMarket.ordering.infrastructure.persistence.assembler.OrderPersistenceEntityAssembler;
 import com.B2BMarket.ordering.infrastructure.persistence.config.SpringDataAuditingConfig;
 import com.B2BMarket.ordering.infrastructure.persistence.disassembler.CustomerPersistenceEntityDisassembler;
-import com.B2BMarket.ordering.infrastructure.persistence.disassembler.OrderPersistenceEntityDisassembler;
-import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
-import com.B2BMarket.ordering.infrastructure.persistence.repository.OrderPersistenceEntityRepository;
+import com.B2BMarket.ordering.infrastructure.persistence.provider.CustomersPersistenceProvider;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

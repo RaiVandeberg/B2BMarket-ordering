@@ -1,4 +1,4 @@
-package com.B2BMarket.ordering.infrastructure.persistence.disassembler;
+package com.B2BMarket.ordering.infrastructure.persistence.order;
 
 import com.B2BMarket.ordering.domain.model.commons.Address;
 import com.B2BMarket.ordering.domain.model.commons.Document;
@@ -21,11 +21,6 @@ import com.B2BMarket.ordering.domain.model.order.Shipping;
 import com.B2BMarket.ordering.domain.model.product.ProductId;
 import com.B2BMarket.ordering.domain.model.product.ProductName;
 import com.B2BMarket.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
-import com.B2BMarket.ordering.infrastructure.persistence.embeddable.BillingEmbeddable;
-import com.B2BMarket.ordering.infrastructure.persistence.embeddable.RecipientEmbeddable;
-import com.B2BMarket.ordering.infrastructure.persistence.embeddable.ShippingEmbeddable;
-import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderItemPersistenceEntity;
-import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;

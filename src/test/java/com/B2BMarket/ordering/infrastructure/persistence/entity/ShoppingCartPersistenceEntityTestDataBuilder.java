@@ -1,7 +1,7 @@
 package com.B2BMarket.ordering.infrastructure.persistence.entity;
+import com.B2BMarket.ordering.infrastructure.persistence.entity.ShoppingCartPersistenceEntity.ShoppingCartPersistenceEntityBuilder;
 
 import com.B2BMarket.ordering.domain.model.IdGenerator;
-import com.B2BMarket.ordering.infrastructure.persistence.entity.ShoppingCartPersistenceEntity.ShoppingCartPersistenceEntityBuilder;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;

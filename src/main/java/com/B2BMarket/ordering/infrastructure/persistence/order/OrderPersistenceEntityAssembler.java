@@ -1,4 +1,4 @@
-package com.B2BMarket.ordering.infrastructure.persistence.assembler;
+package com.B2BMarket.ordering.infrastructure.persistence.order;
 
 import com.B2BMarket.ordering.domain.model.commons.Address;
 import com.B2BMarket.ordering.domain.model.order.BillingInfo;
@@ -7,12 +7,6 @@ import com.B2BMarket.ordering.domain.model.order.OrderItem;
 import com.B2BMarket.ordering.domain.model.order.Recipient;
 import com.B2BMarket.ordering.domain.model.order.Shipping;
 import com.B2BMarket.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
-import com.B2BMarket.ordering.infrastructure.persistence.embeddable.BillingEmbeddable;
-import com.B2BMarket.ordering.infrastructure.persistence.embeddable.RecipientEmbeddable;
-import com.B2BMarket.ordering.infrastructure.persistence.embeddable.ShippingEmbeddable;
-import com.B2BMarket.ordering.infrastructure.persistence.entity.CustomerPersistenceEntity;
-import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderItemPersistenceEntity;
-import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
 import com.B2BMarket.ordering.infrastructure.persistence.repository.CustomerPersistenceEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

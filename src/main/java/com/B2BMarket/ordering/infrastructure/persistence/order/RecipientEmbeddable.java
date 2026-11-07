@@ -1,4 +1,4 @@
-package com.B2BMarket.ordering.infrastructure.persistence.embeddable;
+package com.B2BMarket.ordering.infrastructure.persistence.order;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;

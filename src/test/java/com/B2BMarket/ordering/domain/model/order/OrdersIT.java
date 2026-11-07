@@ -8,6 +8,9 @@ import com.B2BMarket.ordering.domain.model.customer.CustomerTestDataBuilder;
 import com.B2BMarket.ordering.domain.model.customer.Customers;
 import com.B2BMarket.ordering.infrastructure.persistence.assembler.CustomerPersistenceEntityAssembler;
 import com.B2BMarket.ordering.infrastructure.persistence.disassembler.CustomerPersistenceEntityDisassembler;
+import com.B2BMarket.ordering.infrastructure.persistence.order.OrderPersistenceEntityAssembler;
+import com.B2BMarket.ordering.infrastructure.persistence.order.OrderPersistenceEntityDisassembler;
+import com.B2BMarket.ordering.infrastructure.persistence.order.OrdersPersistenceProvider;
 import com.B2BMarket.ordering.infrastructure.persistence.provider.CustomersPersistenceProvider;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,9 +24,6 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import org.springframework.context.annotation.Import;
-import com.B2BMarket.ordering.infrastructure.persistence.provider.OrdersPersistenceProvider;
-import com.B2BMarket.ordering.infrastructure.persistence.assembler.OrderPersistenceEntityAssembler;
-import  com.B2BMarket.ordering.infrastructure.persistence.disassembler.OrderPersistenceEntityDisassembler;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 
 @DataJpaTest

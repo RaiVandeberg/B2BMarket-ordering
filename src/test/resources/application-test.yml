@@ -17,6 +17,6 @@ spring:
 
 B2BMarket:
   integrations:
-    shipping.provider: "RAPIDEX"
+    shipping.provider: "FAKE"
     rapidex.url: "http://localhost:8780"
 

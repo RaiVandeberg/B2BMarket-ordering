@@ -1,5 +1,6 @@
 package com.B2BMarket.ordering.infrastructure.persistence.repository;
 
+import com.B2BMarket.ordering.infrastructure.persistence.entity.ShoppingCartItemPersistenceEntity;
 import com.B2BMarket.ordering.infrastructure.persistence.entity.ShoppingCartPersistenceEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

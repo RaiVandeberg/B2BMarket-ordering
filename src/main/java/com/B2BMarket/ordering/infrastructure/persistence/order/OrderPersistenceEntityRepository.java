@@ -1,6 +1,5 @@
-package com.B2BMarket.ordering.infrastructure.persistence.repository;
+package com.B2BMarket.ordering.infrastructure.persistence.order;
 
-import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.data.jpa.repository.Query;

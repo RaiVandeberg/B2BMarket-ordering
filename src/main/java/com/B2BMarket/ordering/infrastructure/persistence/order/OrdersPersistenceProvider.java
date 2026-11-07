@@ -1,14 +1,10 @@
-package com.B2BMarket.ordering.infrastructure.persistence.provider;
+package com.B2BMarket.ordering.infrastructure.persistence.order;
 
 import com.B2BMarket.ordering.domain.model.commons.Money;
 import com.B2BMarket.ordering.domain.model.customer.CustomerId;
 import com.B2BMarket.ordering.domain.model.order.Order;
 import com.B2BMarket.ordering.domain.model.order.OrderId;
 import com.B2BMarket.ordering.domain.model.order.Orders;
-import com.B2BMarket.ordering.infrastructure.persistence.assembler.OrderPersistenceEntityAssembler;
-import com.B2BMarket.ordering.infrastructure.persistence.disassembler.OrderPersistenceEntityDisassembler;
-import com.B2BMarket.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
-import com.B2BMarket.ordering.infrastructure.persistence.repository.OrderPersistenceEntityRepository;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;

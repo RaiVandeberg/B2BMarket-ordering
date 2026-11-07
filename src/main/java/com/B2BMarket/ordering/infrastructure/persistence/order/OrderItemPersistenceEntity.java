@@ -1,4 +1,4 @@
-package com.B2BMarket.ordering.infrastructure.persistence.entity;
+package com.B2BMarket.ordering.infrastructure.persistence.order;
 
 import jakarta.persistence.*;
 import lombok.*;
