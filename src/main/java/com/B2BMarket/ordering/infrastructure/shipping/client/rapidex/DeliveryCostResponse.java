@@ -1,4 +1,4 @@
-package com.B2BMarket.ordering.infrastructure.client.rapidex;
+package com.B2BMarket.ordering.infrastructure.shipping.client.rapidex;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

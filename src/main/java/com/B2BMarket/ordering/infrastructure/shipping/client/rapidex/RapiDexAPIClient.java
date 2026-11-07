@@ -1,4 +1,4 @@
-package com.B2BMarket.ordering.infrastructure.client.rapidex;
+package com.B2BMarket.ordering.infrastructure.shipping.client.rapidex;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.service.annotation.PostExchange;

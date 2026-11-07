@@ -1,4 +1,4 @@
-package com.B2BMarket.ordering.infrastructure.client.rapidex;
+package com.B2BMarket.ordering.infrastructure.shipping.client.rapidex;
 
 import com.B2BMarket.ordering.domain.model.commons.Money;
 import com.B2BMarket.ordering.domain.model.order.shipping.ShippingCostService;

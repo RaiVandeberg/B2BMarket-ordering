@@ -1,4 +1,4 @@
-package com.B2BMarket.ordering.infrastructure.fake;
+package com.B2BMarket.ordering.infrastructure.shipping.client.fake;
 
 import com.B2BMarket.ordering.domain.model.commons.Address;
 import com.B2BMarket.ordering.domain.model.commons.ZipCode;

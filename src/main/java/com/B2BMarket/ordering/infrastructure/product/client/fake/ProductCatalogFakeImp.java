@@ -1,4 +1,4 @@
-package com.B2BMarket.ordering.infrastructure.fake;
+package com.B2BMarket.ordering.infrastructure.product.client.fake;
 
 import com.B2BMarket.ordering.domain.model.commons.Money;
 import com.B2BMarket.ordering.domain.model.product.Product;
