@@ -3,6 +3,7 @@ package com.B2BMarket.ordering.application.service;
 
 import com.B2BMarket.ordering.application.model.AddressData;
 import com.B2BMarket.ordering.application.model.CustomerInput;
+import com.B2BMarket.ordering.application.model.CustomerOutput;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ class CustomerManagementApplicationServiceIT {
         CustomerInput input = CustomerInput.builder()
                 .firstName("John")
                 .lastName("Doe")
-                .email("johndoe" + UUID.randomUUID() + "@email.com")
+                .email("johndoe@email.com")
                 .phone("478-256-2604")
                 .document("255-08-0578")
                 .birthDate(LocalDate.of(1991, 7, 5))
@@ -41,6 +42,17 @@ class CustomerManagementApplicationServiceIT {
 
         UUID customerId = customerManagementApplicationService.create(input);
         Assertions.assertThat(customerId).isNotNull();
+
+        CustomerOutput customerOutput = customerManagementApplicationService.findById(customerId);
+        Assertions.assertThat(customerOutput.getId()).isEqualTo(customerId);
+        Assertions.assertThat(customerOutput.getFirstName()).isEqualTo("John");
+        Assertions.assertThat(customerOutput.getEmail()).isEqualTo("johndoe@email.com");
+        Assertions.assertThat(customerOutput.getBirthDate()).isEqualTo(LocalDate.of(1991, 7, 5));
+        Assertions.assertThat(customerOutput.getPhone()).isEqualTo("478-256-2604");
+        Assertions.assertThat(customerOutput.getRegisteredAt()).isNotNull();
+        Assertions.assertThat(customerOutput.getDocument()).isEqualTo("255-08-0578");
+
+
     }
 
 }
