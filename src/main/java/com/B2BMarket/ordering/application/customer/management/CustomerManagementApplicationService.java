@@ -39,15 +39,7 @@ public class CustomerManagementApplicationService {
                 new Phone(input.getPhone()),
                 new Document(input.getDocument()),
                 input.getPromotionNotificationsAllowed(),
-                Address.builder()
-                       .zipCode(new ZipCode(address.getZipCode()))
-                       .city(address.getCity())
-                       .state(address.getState())
-                       .neighborhood(address.getNeighborhood())
-                       .street(address.getStreet())
-                       .number(address.getNumber())
-                       .complement(address.getComplement())
-                       .build()
+                toAddress(address)
         );
 
         customers.add(customer);
@@ -64,4 +56,53 @@ public class CustomerManagementApplicationService {
 
         return mapper.convert(customer, CustomerOutput.class);
     }
+
+    @Transactional
+    public void update(UUID rawCustomerId, CustomerUpdateInput input){
+        Objects.requireNonNull(input);
+        Objects.requireNonNull(rawCustomerId);
+        CustomerId id = new CustomerId(rawCustomerId);
+        Customer customer = customers.ofId(new CustomerId(rawCustomerId))
+                .orElseThrow(() -> new CustomerNotFoundException(id));
+
+        customer.changeName(new FullName(input.getFirstName(), input.getLastName()));
+        customer.changePhone(new Phone(input.getPhone()));
+
+        if(Boolean.TRUE.equals(input.getPromotionNotificationsAllowed())){
+            customer.enablePromotionNotifications();
+        } else {
+            customer.disablePromotionNotifications();
+        }
+
+        AddressData address = input.getAddress();
+
+        customer.changeAdress(toAddress(address));
+
+        customers.add(customer);
+    }
+
+    @Transactional
+    public void archive(UUID rawCustomerId){
+        Objects.requireNonNull(rawCustomerId);
+        CustomerId id = new CustomerId(rawCustomerId);
+        Customer customer = customers.ofId(id)
+                .orElseThrow(() -> new CustomerNotFoundException(id));
+
+        customer.archive();
+
+        customers.add(customer);
+    }
+
+    private Address toAddress(AddressData address) {
+        return Address.builder()
+                .zipCode(new ZipCode(address.getZipCode()))
+                .city(address.getCity())
+                .state(address.getState())
+                .neighborhood(address.getNeighborhood())
+                .street(address.getStreet())
+                .number(address.getNumber())
+                .complement(address.getComplement())
+                .build();
+    }
+
 }
