@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class AddressData {
     private String street;
     private String number;
-    private String Complement;
+    private String complement;
     private String neighborhood;
     private String city;
     private String state;
