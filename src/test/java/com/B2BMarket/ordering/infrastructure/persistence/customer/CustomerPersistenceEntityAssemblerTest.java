@@ -21,7 +21,7 @@ class CustomerPersistenceEntityAssemblerTest {
                 p -> assertThat(p.getId()).isEqualTo(customer.id().value()),
                 p -> assertThat(p.getFirstName()).isEqualTo(customer.fullName().firstName()),
                 p -> assertThat(p.getLastName()).isEqualTo(customer.fullName().lastName()),
-                p -> assertThat(p.getBirthDate()).isEqualTo(customer.birthDate().birthDate()),
+                p -> assertThat(p.getBirthDate()).isEqualTo(customer.birthDate().value()),
                 p -> assertThat(p.getEmail()).isEqualTo(customer.email().value()),
                 p -> assertThat(p.getPhone()).isEqualTo(customer.phone().value()),
                 p -> assertThat(p.getDocument()).isEqualTo(customer.document().value()),

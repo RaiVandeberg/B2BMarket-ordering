@@ -8,21 +8,21 @@ import java.util.Objects;
 import static com.B2BMarket.ordering.domain.model.FieldValidations.requiresDateInPast;
 
 
-public record BirthDate(LocalDate birthDate) {
+public record BirthDate(LocalDate value) {
 
-    public BirthDate(LocalDate birthDate){
-        Objects.requireNonNull(birthDate);
-        requiresDateInPast(birthDate);
+    public BirthDate(LocalDate value){
+        Objects.requireNonNull(value);
+        requiresDateInPast(value);
 
-        this.birthDate = birthDate;
+        this.value = value;
     }
 
     public Integer age() {
-        return Period.between(birthDate, LocalDate.now()).getYears();
+        return Period.between(value, LocalDate.now()).getYears();
     }
 
     @Override
     public String toString() {
-        return birthDate.toString();
+        return value.toString();
     }
 }
