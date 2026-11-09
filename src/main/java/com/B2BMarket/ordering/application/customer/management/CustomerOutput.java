@@ -1,5 +1,6 @@
-package com.B2BMarket.ordering.application.model;
+package com.B2BMarket.ordering.application.customer.management;
 
+import com.B2BMarket.ordering.application.commons.AddressData;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

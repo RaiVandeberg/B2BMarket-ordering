@@ -1,4 +1,4 @@
-package com.B2BMarket.ordering.application.model;
+package com.B2BMarket.ordering.application.commons;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

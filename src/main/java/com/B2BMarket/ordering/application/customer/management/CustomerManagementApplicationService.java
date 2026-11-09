@@ -1,8 +1,8 @@
-package com.B2BMarket.ordering.application.service;
+package com.B2BMarket.ordering.application.customer.management;
 
-import com.B2BMarket.ordering.application.model.AddressData;
-import com.B2BMarket.ordering.application.model.CustomerInput;
-import com.B2BMarket.ordering.application.model.CustomerOutput;
+import com.B2BMarket.ordering.application.commons.AddressData;
+
+import com.B2BMarket.ordering.application.utility.Mapper;
 import com.B2BMarket.ordering.domain.model.commons.Address;
 import com.B2BMarket.ordering.domain.model.commons.Document;
 import com.B2BMarket.ordering.domain.model.commons.Email;
@@ -23,6 +23,8 @@ public class CustomerManagementApplicationService {
 
     private final CustomerRegistrationService customerRegistrationService;
     private final Customers customers;
+
+    private final Mapper mapper;
 
     @Transactional
     public UUID create(CustomerInput input){
@@ -59,28 +61,7 @@ public class CustomerManagementApplicationService {
         CustomerId id = new CustomerId(customerId);
         Customer customer = customers.ofId(id)
                 .orElseThrow(() -> new CustomerNotFoundException(id));
-        return CustomerOutput.builder()
-                .id(customer.id().value())
-                .firstName(customer.fullName().firstName())
-                .lastName(customer.fullName().lastName())
-                .email(customer.email().value())
-                .document(customer.document().value())
-                .phone(customer.phone().value())
-                .birthDate(customer.birthDate() == null ? null : customer.birthDate().birthDate())
-                .loyaltyPoints(customer.loyaltyPoints().value())
-                .registeredAt(customer.registeredAt())
-                .archivedAt(customer.archivedAt())
-                .address(AddressData.builder()
-                        .street(customer.address().street())
-                        .number(customer.address().number())
-                        .Complement(customer.address().complement())
-                        .neighborhood(customer.address().neighborhood())
-                        .city(customer.address().city())
-                        .state(customer.address().state())
-                        .zipCode(customer.address().zipCode().value())
-                        .build())
-                .promotionNotificationsAllowed(customer.isPromotionNotificationsAllowed())
-                .archived(customer.isArchived())
-                .build();
+
+        return mapper.convert(customer, CustomerOutput.class);
     }
 }

@@ -1,9 +1,10 @@
-package com.B2BMarket.ordering.application.service;
+package com.B2BMarket.ordering.application.service.customer.management;
 
 
-import com.B2BMarket.ordering.application.model.AddressData;
-import com.B2BMarket.ordering.application.model.CustomerInput;
-import com.B2BMarket.ordering.application.model.CustomerOutput;
+import com.B2BMarket.ordering.application.customer.management.CustomerManagementApplicationService;
+import com.B2BMarket.ordering.application.commons.AddressData;
+import com.B2BMarket.ordering.application.customer.management.CustomerInput;
+import com.B2BMarket.ordering.application.customer.management.CustomerOutput;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
