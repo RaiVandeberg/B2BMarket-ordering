@@ -5,6 +5,7 @@ import com.B2BMarket.ordering.domain.model.commons.Money;
 
 public class ProductTestDataBuilder {
 
+
     public static final ProductId PRODUCT_ID_NOTEBOOK = new ProductId();
     public static final ProductId PRODUCT_ID_DESKTOP = new ProductId();
     public static final ProductId PRODUCT_ID_RAM_MEMORY = new ProductId();
