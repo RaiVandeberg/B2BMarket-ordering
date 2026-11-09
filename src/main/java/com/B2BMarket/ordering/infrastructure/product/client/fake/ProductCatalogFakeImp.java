@@ -5,9 +5,11 @@ import com.B2BMarket.ordering.domain.model.product.Product;
 import com.B2BMarket.ordering.domain.model.product.ProductCatalogService;
 import com.B2BMarket.ordering.domain.model.product.ProductId;
 import com.B2BMarket.ordering.domain.model.product.ProductName;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+@Component
 public class ProductCatalogFakeImp implements ProductCatalogService {
     @Override
     public Optional<Product> ofId(ProductId productId) {
