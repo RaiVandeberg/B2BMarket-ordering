@@ -25,7 +25,7 @@ public class CustomerLoyaltyPointsApplicationService {
     private final CustomerLoyaltyPointsService customerLoyaltyPointsService;
 
     @Transactional
-    public void addLoyaltyPoints(UUID rawCustomerId, String rawOrderId) {
+    public void addLoyaltyPoints(UUID rawCustomerId, String rawOrderId){
         Objects.requireNonNull(rawCustomerId);
         Objects.requireNonNull(rawOrderId);
 

@@ -28,7 +28,7 @@ public class ShoppingCartManagementApplicationService {
     private final ShoppingService shoppingService;
 
     @Transactional
-    public void addItem(ShoppingCartItemInput input) {
+    public void addItem(ShoppingCartItemInput input){
         Objects.requireNonNull(input);
 
         ShoppingCartId shoppingCartId = new ShoppingCartId(input.getShoppingCartId());
@@ -45,7 +45,7 @@ public class ShoppingCartManagementApplicationService {
     }
 
     @Transactional
-    public UUID createNew(UUID rawCustomerId) {
+    public UUID createNew(UUID rawCustomerId){
         Objects.requireNonNull(rawCustomerId);
 
         CustomerId customerId = new CustomerId(rawCustomerId);
@@ -58,7 +58,7 @@ public class ShoppingCartManagementApplicationService {
     }
 
     @Transactional
-    public void removeItem(UUID rawShoppingCartId, UUID rawShoppingCartItemId) {
+    public void removeItem(UUID rawShoppingCartId, UUID rawShoppingCartItemId){
         Objects.requireNonNull(rawShoppingCartId);
         Objects.requireNonNull(rawShoppingCartItemId);
 
@@ -72,7 +72,7 @@ public class ShoppingCartManagementApplicationService {
     }
 
     @Transactional
-    public void empty(UUID rawShoppingCartId) {
+    public void empty(UUID rawShoppingCartId){
         Objects.requireNonNull(rawShoppingCartId);
 
         ShoppingCartId shoppingCartId = new ShoppingCartId(rawShoppingCartId);
@@ -85,7 +85,7 @@ public class ShoppingCartManagementApplicationService {
     }
 
     @Transactional
-    public void delete(UUID rawShoppingCartId) {
+    public void delete(UUID rawShoppingCartId){
         Objects.requireNonNull(rawShoppingCartId);
 
         ShoppingCartId shoppingCartId = new ShoppingCartId(rawShoppingCartId);
