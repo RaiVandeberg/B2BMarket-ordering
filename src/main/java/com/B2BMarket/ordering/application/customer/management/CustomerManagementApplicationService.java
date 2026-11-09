@@ -93,6 +93,19 @@ public class CustomerManagementApplicationService {
         customers.add(customer);
     }
 
+    @Transactional
+    public void changeEmail(UUID rawCustomerId, String newEmail){
+        Objects.requireNonNull(rawCustomerId);
+        Objects.requireNonNull(newEmail);
+        CustomerId id = new CustomerId(rawCustomerId);
+        Customer customer = customers.ofId(id)
+                .orElseThrow(() -> new CustomerNotFoundException(id));
+
+        customerRegistrationService.changeEmail(customer, new Email(newEmail));
+
+        customers.add(customer);
+    }
+
     private Address toAddress(AddressData address) {
         return Address.builder()
                 .zipCode(new ZipCode(address.getZipCode()))
