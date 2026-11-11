@@ -74,7 +74,7 @@ public class CustomerPersistenceEntity
     public void addEvents(Collection<Object> events) {
         if (events != null) {
             for (Object event : events) {
-                this.registerEvent(events);
+                this.registerEvent(event);
             }
         }
     }

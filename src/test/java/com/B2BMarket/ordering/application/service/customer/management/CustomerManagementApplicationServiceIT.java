@@ -6,14 +6,14 @@ import com.B2BMarket.ordering.application.commons.AddressData;
 import com.B2BMarket.ordering.application.customer.management.CustomerInput;
 import com.B2BMarket.ordering.application.customer.management.CustomerOutput;
 import com.B2BMarket.ordering.application.customer.management.CustomerUpdateInput;
-import com.B2BMarket.ordering.domain.model.customer.CustomerArchivedException;
-import com.B2BMarket.ordering.domain.model.customer.CustomerEmailIsUseException;
-import com.B2BMarket.ordering.domain.model.customer.CustomerNotFoundException;
-import com.B2BMarket.ordering.domain.model.customer.CustomerTestDataBuilder;
+import com.B2BMarket.ordering.domain.model.customer.*;
+import com.B2BMarket.ordering.infrastructure.listerner.customer.CustomerEventListener;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -25,6 +25,9 @@ class CustomerManagementApplicationServiceIT {
 
     @Autowired
     private CustomerManagementApplicationService customerManagementApplicationService;
+
+    @MockitoSpyBean
+    private CustomerEventListener customerEventListener;
 
 
     @Test
@@ -55,6 +58,15 @@ class CustomerManagementApplicationServiceIT {
             );
 
         Assertions.assertThat(customerOutput.getRegisteredAt()).isNotNull();
+
+        Mockito.verify(customerEventListener)
+                .listen(Mockito.any(CustomerRegisteredEvent.class));
+
+        Mockito.verify(customerEventListener)
+                .listenSecondary(Mockito.any(CustomerRegisteredEvent.class));
+
+        Mockito.verify(customerEventListener, Mockito.never())
+                .listen(Mockito.any(CustomerArchivedEvent.class));
     }
 
     @Test
