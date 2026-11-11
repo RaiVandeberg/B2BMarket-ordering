@@ -1,7 +1,7 @@
 package com.B2BMarket.ordering.infrastructure.persistence.order;
 
 import com.B2BMarket.ordering.domain.model.commons.Address;
-import com.B2BMarket.ordering.domain.model.order.BillingInfo;
+import com.B2BMarket.ordering.domain.model.order.Billing;
 import com.B2BMarket.ordering.domain.model.order.Order;
 import com.B2BMarket.ordering.domain.model.order.OrderItem;
 import com.B2BMarket.ordering.domain.model.order.Recipient;
@@ -89,7 +89,7 @@ public class OrderPersistenceEntityAssembler {
         return orderItemPersistenceEntity;
     }
 
-    private BillingEmbeddable assembleBilling(BillingInfo billing) {
+    private BillingEmbeddable assembleBilling(Billing billing) {
         if (billing == null) {
             return null;
         }

@@ -14,7 +14,7 @@ public class OrderChangingTest {
         // given
         Order order = Order.draft(new CustomerId());
         Product product = ProductTestDataBuilder.aProductAltMousePad().build();
-        BillingInfo billing = OrderTestDataBuilder.aBillingInfo();
+        Billing billing = OrderTestDataBuilder.aBilling();
         Shipping shipping = OrderTestDataBuilder.aShipping();
 
         // when & then
@@ -55,7 +55,7 @@ public class OrderChangingTest {
     @Test
     void givenPlacedOrder_whenChangeBilling_shouldThrowException() {
         Order order = OrderTestDataBuilder.anOrder().status(OrderStatus.PLACED).build();
-        BillingInfo newBilling = OrderTestDataBuilder.aBillingInfo();
+        Billing newBilling = OrderTestDataBuilder.aBilling();
 
         Assertions.assertThatExceptionOfType(OrderCannotBeEditedException.class)
                 .isThrownBy(() -> order.changeBilling(newBilling));

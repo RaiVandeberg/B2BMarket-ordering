@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static com.B2BMarket.ordering.domain.model.customer.CustomerTestDataBuilder.DEFAULT_CUSTOMER_ID;
-import static com.B2BMarket.ordering.domain.model.order.OrderTestDataBuilder.aBillingInfo;
+import static com.B2BMarket.ordering.domain.model.order.OrderTestDataBuilder.aBilling;
 import static com.B2BMarket.ordering.domain.model.order.OrderTestDataBuilder.aShipping;
 import static com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartTestDataBuilder.aShoppingCart;
 
@@ -24,7 +24,7 @@ class CheckoutServiceTest {
         ShoppingCart shoppingCart = aShoppingCart().build();
         List<ShoppingCartItem> cartItems = List.copyOf(shoppingCart.items());
 
-        BillingInfo billing = aBillingInfo();
+        Billing billing = aBilling();
         Shipping shipping = aShipping();
         PaymentMethod paymentMethod = PaymentMethod.CREDIT_CARD;
 
@@ -60,7 +60,7 @@ class CheckoutServiceTest {
         ShoppingCart shoppingCart = aShoppingCart().build();
         shoppingCart.refreshItem(ProductTestDataBuilder.aProduct().inStock(false).build());
 
-        BillingInfo billing = aBillingInfo();
+        Billing billing = aBilling();
         Shipping shipping = aShipping();
         PaymentMethod paymentMethod = PaymentMethod.CREDIT_CARD;
 
@@ -77,7 +77,7 @@ class CheckoutServiceTest {
     public void givenEmptyShoppingCart_WhenCheckingOut_ShouldThrowExceptionAndKeepCartEmpty() {
         ShoppingCart shoppingCart = aShoppingCart().empty().build();
 
-        BillingInfo billing = aBillingInfo();
+        Billing billing = aBilling();
         Shipping shipping = aShipping();
         PaymentMethod paymentMethod = PaymentMethod.CREDIT_CARD;
 

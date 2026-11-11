@@ -1,7 +1,7 @@
 package com.B2BMarket.ordering.application.checkout;
 
 import com.B2BMarket.ordering.domain.model.commons.ZipCode;
-import com.B2BMarket.ordering.domain.model.order.BillingInfo;
+import com.B2BMarket.ordering.domain.model.order.Billing;
 import com.B2BMarket.ordering.domain.model.order.CheckoutService;
 import com.B2BMarket.ordering.domain.model.order.Order;
 import com.B2BMarket.ordering.domain.model.order.Orders;
@@ -48,7 +48,7 @@ public class CheckoutApplicationService {
 
         Shipping shipping = shippingInputDisassembler.toDomainModel(input.getShipping(), shippingCalculationResult);
 
-        BillingInfo billing = billingInputDisassembler.toDomainModel(input.getBilling());
+        Billing billing = billingInputDisassembler.toDomainModel(input.getBilling());
 
         Order order = checkoutService.checkout(shoppingCart, billing, shipping, paymentMethod);
 

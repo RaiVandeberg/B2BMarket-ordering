@@ -10,7 +10,7 @@ import java.util.Objects;
 @DomainService()
 public class BuyNowService {
 
-    public Order buyNow(Product product, CustomerId customerId, BillingInfo billing,
+    public Order buyNow(Product product, CustomerId customerId, Billing billing,
                         Shipping shipping, Quantity quantity, PaymentMethod paymentMethod) {
         Objects.requireNonNull(product);
         Objects.requireNonNull(customerId);

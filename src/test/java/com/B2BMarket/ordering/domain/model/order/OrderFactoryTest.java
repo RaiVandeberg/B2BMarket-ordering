@@ -13,7 +13,7 @@ class OrderFactoryTest {
     @Test
     public void shouldGenerateFilledOrderThatCanBePlaced() {
         Shipping shipping = OrderTestDataBuilder.aShipping();
-        BillingInfo billing = OrderTestDataBuilder.aBillingInfo();
+        Billing billing = OrderTestDataBuilder.aBilling();
 
         Product product = ProductTestDataBuilder.aProduct().build();
         PaymentMethod paymentMethod = PaymentMethod.GATEWAY_BALANCE;

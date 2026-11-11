@@ -11,7 +11,7 @@ import java.util.Objects;
 @DomainService()
 public class CheckoutService {
 
-    public Order checkout(ShoppingCart shoppingCart, BillingInfo billing,
+    public Order checkout(ShoppingCart shoppingCart, Billing billing,
                           Shipping shipping, PaymentMethod paymentMethod) {
         Objects.requireNonNull(shoppingCart);
         Objects.requireNonNull(billing);

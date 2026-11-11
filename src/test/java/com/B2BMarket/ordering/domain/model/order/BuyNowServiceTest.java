@@ -9,7 +9,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static com.B2BMarket.ordering.domain.model.customer.CustomerTestDataBuilder.DEFAULT_CUSTOMER_ID;
-import static com.B2BMarket.ordering.domain.model.order.OrderTestDataBuilder.aBillingInfo;
+import static com.B2BMarket.ordering.domain.model.order.OrderTestDataBuilder.aBilling;
 import static com.B2BMarket.ordering.domain.model.order.OrderTestDataBuilder.aShipping;
 
 class BuyNowServiceTest {
@@ -19,7 +19,7 @@ class BuyNowServiceTest {
     @Test
     public void givenValidProduct_WhenBuyingNow_ShouldCreatePlacedOrderWithTheItem() {
         Product product = ProductTestDataBuilder.aProduct().build();
-        BillingInfo billing = aBillingInfo();
+        Billing billing = aBilling();
         Shipping shipping = aShipping();
         Quantity quantity = new Quantity(2);
         PaymentMethod paymentMethod = PaymentMethod.CREDIT_CARD;
@@ -47,7 +47,7 @@ class BuyNowServiceTest {
     @Test
     public void givenProductOutOfStock_WhenBuyingNow_ShouldThrowProductOutOfStockException() {
         Product product = ProductTestDataBuilder.aProductUnavailable().build();
-        BillingInfo billing = aBillingInfo();
+        Billing billing = aBilling();
         Shipping shipping = aShipping();
         Quantity quantity = new Quantity(1);
         PaymentMethod paymentMethod = PaymentMethod.CREDIT_CARD;
@@ -60,7 +60,7 @@ class BuyNowServiceTest {
     @Test
     public void givenZeroQuantity_WhenBuyingNow_ShouldThrowIllegalArgumentException() {
         Product product = ProductTestDataBuilder.aProduct().build();
-        BillingInfo billing = aBillingInfo();
+        Billing billing = aBilling();
         Shipping shipping = aShipping();
         Quantity quantity = Quantity.ZERO;
         PaymentMethod paymentMethod = PaymentMethod.CREDIT_CARD;

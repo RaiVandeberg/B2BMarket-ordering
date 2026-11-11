@@ -20,8 +20,8 @@ public class OrderCannotBePlacedException extends DomainException {
         return new OrderCannotBePlacedException(String.format(ERROR_ORDER_CANNOT_BE_PLACED_HAS_NO_SHIPPING_INFO, id));
     }
 
-    public static OrderCannotBePlacedException noBillingInfo(OrderId id) {
-        return new OrderCannotBePlacedException(String.format(ERROR_ORDER_CANNOT_BE_PLACED_HAS_NO_BILLING_INFO, id));
+    public static OrderCannotBePlacedException noBilling(OrderId id) {
+        return new OrderCannotBePlacedException(String.format(ERROR_ORDER_CANNOT_BE_PLACED_HAS_NO_BILLING, id));
     }
 
     public static OrderCannotBePlacedException noPaymentMethod(OrderId id) {

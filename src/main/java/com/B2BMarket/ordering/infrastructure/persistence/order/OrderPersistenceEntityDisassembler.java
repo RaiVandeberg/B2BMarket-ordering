@@ -9,7 +9,7 @@ import com.B2BMarket.ordering.domain.model.commons.Phone;
 import com.B2BMarket.ordering.domain.model.commons.Quantity;
 import com.B2BMarket.ordering.domain.model.commons.ZipCode;
 import com.B2BMarket.ordering.domain.model.customer.CustomerId;
-import com.B2BMarket.ordering.domain.model.order.BillingInfo;
+import com.B2BMarket.ordering.domain.model.order.Billing;
 import com.B2BMarket.ordering.domain.model.order.Order;
 import com.B2BMarket.ordering.domain.model.order.OrderId;
 import com.B2BMarket.ordering.domain.model.order.OrderItem;
@@ -70,11 +70,11 @@ public class OrderPersistenceEntityDisassembler {
                 .build();
     }
 
-    private BillingInfo disassembleBilling(BillingEmbeddable billing) {
+    private Billing disassembleBilling(BillingEmbeddable billing) {
         if (billing == null) {
             return null;
         }
-        return BillingInfo.builder()
+        return Billing.builder()
                 .fullName(new FullName(billing.getFirstName(), billing.getLastName()))
                 .document(new Document(billing.getDocument()))
                 .phone(new Phone(billing.getPhone()))

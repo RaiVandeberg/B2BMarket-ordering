@@ -15,7 +15,7 @@ public class OrderFactory {
     public static Order filled(
             CustomerId customerId,
             Shipping shipping,
-            BillingInfo billing,
+            Billing billing,
             PaymentMethod paymentMethod,
             Product product,
             Quantity productQuantity

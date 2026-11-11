@@ -2,7 +2,7 @@ package com.B2BMarket.ordering.infrastructure.persistence.order;
 
 import com.B2BMarket.ordering.domain.model.commons.Address;
 import com.B2BMarket.ordering.domain.model.customer.CustomerId;
-import com.B2BMarket.ordering.domain.model.order.BillingInfo;
+import com.B2BMarket.ordering.domain.model.order.Billing;
 import com.B2BMarket.ordering.domain.model.order.Order;
 import com.B2BMarket.ordering.domain.model.order.OrderItem;
 import com.B2BMarket.ordering.domain.model.order.OrderTestDataBuilder;
@@ -68,7 +68,7 @@ class OrderPersistenceEntityAssemblerTest {
         Order order = OrderTestDataBuilder.anOrder().build();
         OrderPersistenceEntity orderPersistenceEntity = assembler.fromDomain(order);
 
-        BillingInfo billing = order.billing();
+        Billing billing = order.billing();
         assertThat(orderPersistenceEntity.getBilling()).satisfies(
                 b -> assertThat(b.getFirstName()).isEqualTo(billing.fullName().firstName()),
                 b -> assertThat(b.getLastName()).isEqualTo(billing.fullName().lastName()),

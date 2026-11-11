@@ -8,11 +8,11 @@ import com.B2BMarket.ordering.domain.model.commons.Phone;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class BillingInfoTest {
+class BillingTest {
 
     @Test
-    void given_validBillingInfo_whenCreate_shouldSucceed() {
-        BillingInfo billingInfo = BillingInfo.builder()
+    void given_validBilling_whenCreate_shouldSucceed() {
+        Billing billing = Billing.builder()
                 .fullName(new FullName("John", "Doe"))
                 .document(new Document("123-45-6789"))
                 .phone(new Phone("123-456-7890"))
@@ -24,13 +24,13 @@ class BillingInfoTest {
                 )
                 .build();
 
-        Assertions.assertThat(billingInfo).isNotNull();
+        Assertions.assertThat(billing).isNotNull();
     }
 
     @Test
-    void given_nullField_whenCreateBillingInfo_shouldThrowException() {
+    void given_nullField_whenCreateBilling_shouldThrowException() {
         Assertions.assertThatExceptionOfType(NullPointerException.class)
-                .isThrownBy(() -> BillingInfo.builder()
+                .isThrownBy(() -> Billing.builder()
                         .fullName(null)
                         .document(new Document("123-45-6789"))
                         .phone(new Phone("123-456-7890"))

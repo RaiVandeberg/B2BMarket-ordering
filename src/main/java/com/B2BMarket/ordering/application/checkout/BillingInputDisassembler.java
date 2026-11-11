@@ -2,15 +2,15 @@ package com.B2BMarket.ordering.application.checkout;
 
 import com.B2BMarket.ordering.application.commons.AddressData;
 import com.B2BMarket.ordering.domain.model.commons.*;
-import com.B2BMarket.ordering.domain.model.order.BillingInfo;
+import com.B2BMarket.ordering.domain.model.order.Billing;
 import org.springframework.stereotype.Component;
 
 @Component
 class BillingInputDisassembler {
 
-    public BillingInfo toDomainModel(BillingData billingData) {
+    public Billing toDomainModel(BillingData billingData) {
         AddressData address = billingData.getAddress();
-        return BillingInfo.builder()
+        return Billing.builder()
                 .fullName(new FullName(billingData.getFirstName(), billingData.getLastName()))
                 .document(new Document(billingData.getDocument()))
                 .phone(new Phone(billingData.getPhone()))
