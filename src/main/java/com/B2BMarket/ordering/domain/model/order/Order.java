@@ -1,5 +1,6 @@
 package com.B2BMarket.ordering.domain.model.order;
 
+import com.B2BMarket.ordering.domain.model.AbstractEventSourceEntity;
 import com.B2BMarket.ordering.domain.model.AggregateRoot;
 import com.B2BMarket.ordering.domain.model.commons.Money;
 import com.B2BMarket.ordering.domain.model.commons.Quantity;
@@ -12,7 +13,9 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.*;
 
-public class Order implements AggregateRoot<OrderId> {
+public class Order
+        extends AbstractEventSourceEntity
+        implements AggregateRoot<OrderId> {
 
     private OrderId id;
     private CustomerId customerId;
