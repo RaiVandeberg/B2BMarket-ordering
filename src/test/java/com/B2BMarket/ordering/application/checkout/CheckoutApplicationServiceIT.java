@@ -4,6 +4,7 @@ import com.B2BMarket.ordering.domain.model.commons.Money;
 import com.B2BMarket.ordering.domain.model.customer.CustomerTestDataBuilder;
 import com.B2BMarket.ordering.domain.model.customer.Customers;
 import com.B2BMarket.ordering.domain.model.order.OrderId;
+import com.B2BMarket.ordering.domain.model.order.OrderPlacedEvent;
 import com.B2BMarket.ordering.domain.model.order.Orders;
 import com.B2BMarket.ordering.domain.model.order.shipping.ShippingCostService;
 import com.B2BMarket.ordering.domain.model.product.ProductTestDataBuilder;
@@ -12,6 +13,7 @@ import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartCantProceedT
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartNotFoundException;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartTestDataBuilder;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCarts;
+import com.B2BMarket.ordering.infrastructure.listerner.order.OrderEventListener;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,6 +21,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -42,6 +45,9 @@ class CheckoutApplicationServiceIT {
 
     @MockitoBean
     private ShippingCostService shippingCostService;
+
+    @MockitoSpyBean
+    private OrderEventListener orderEventListener;
 
     @BeforeEach
     public void setUp(){
@@ -70,6 +76,9 @@ class CheckoutApplicationServiceIT {
 
         ShoppingCart updatedCart = shoppingCarts.ofId(shoppingCart.id()).orElseThrow();
         Assertions.assertThat(updatedCart.isEmpty()).isTrue();
+
+        Mockito.verify(orderEventListener, Mockito.times(1))
+                .listen(Mockito.any(OrderPlacedEvent.class));
     }
 
     @Test

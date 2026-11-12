@@ -3,16 +3,22 @@ package com.B2BMarket.ordering.application.order.management;
 import com.B2BMarket.ordering.domain.model.customer.CustomerTestDataBuilder;
 import com.B2BMarket.ordering.domain.model.customer.Customers;
 import com.B2BMarket.ordering.domain.model.order.Order;
+import com.B2BMarket.ordering.domain.model.order.OrderCanceledEvent;
 import com.B2BMarket.ordering.domain.model.order.OrderNotFoundException;
+import com.B2BMarket.ordering.domain.model.order.OrderPaidEvent;
+import com.B2BMarket.ordering.domain.model.order.OrderReadyEvent;
 import com.B2BMarket.ordering.domain.model.order.OrderStatus;
 import com.B2BMarket.ordering.domain.model.order.OrderStatusCannotBeChangedException;
 import com.B2BMarket.ordering.domain.model.order.OrderTestDataBuilder;
 import com.B2BMarket.ordering.domain.model.order.Orders;
+import com.B2BMarket.ordering.infrastructure.listerner.order.OrderEventListener;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
@@ -27,6 +33,9 @@ class OrderManagementApplicationServiceIT {
 
     @Autowired
     private Orders orders;
+
+    @MockitoSpyBean
+    private OrderEventListener orderEventListener;
 
     @BeforeEach
     public void setUp(){
@@ -45,6 +54,9 @@ class OrderManagementApplicationServiceIT {
         Order canceledOrder = orders.ofId(order.id()).orElseThrow();
         Assertions.assertThat(canceledOrder.status()).isEqualTo(OrderStatus.CANCELLED);
         Assertions.assertThat(canceledOrder.canceledAt()).isNotNull();
+
+        Mockito.verify(orderEventListener, Mockito.times(1))
+                .listen(Mockito.any(OrderCanceledEvent.class));
     }
 
     @Test
@@ -74,6 +86,9 @@ class OrderManagementApplicationServiceIT {
         Order paidOrder = orders.ofId(order.id()).orElseThrow();
         Assertions.assertThat(paidOrder.status()).isEqualTo(OrderStatus.PAID);
         Assertions.assertThat(paidOrder.paidAt()).isNotNull();
+
+        Mockito.verify(orderEventListener, Mockito.times(1))
+                .listen(Mockito.any(OrderPaidEvent.class));
     }
 
     @Test
@@ -103,6 +118,9 @@ class OrderManagementApplicationServiceIT {
         Order readyOrder = orders.ofId(order.id()).orElseThrow();
         Assertions.assertThat(readyOrder.status()).isEqualTo(OrderStatus.READY);
         Assertions.assertThat(readyOrder.readyAt()).isNotNull();
+
+        Mockito.verify(orderEventListener, Mockito.times(1))
+                .listen(Mockito.any(OrderReadyEvent.class));
     }
 
     @Test
