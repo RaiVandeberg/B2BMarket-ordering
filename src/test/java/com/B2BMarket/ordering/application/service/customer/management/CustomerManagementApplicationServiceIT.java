@@ -6,6 +6,7 @@ import com.B2BMarket.ordering.application.commons.AddressData;
 import com.B2BMarket.ordering.application.customer.management.CustomerInput;
 import com.B2BMarket.ordering.application.customer.management.CustomerOutput;
 import com.B2BMarket.ordering.application.customer.management.CustomerUpdateInput;
+import com.B2BMarket.ordering.application.customer.notification.CustomerNotificationApplicationService;
 import com.B2BMarket.ordering.domain.model.customer.*;
 import com.B2BMarket.ordering.infrastructure.listerner.customer.CustomerEventListener;
 import org.assertj.core.api.Assertions;
@@ -28,6 +29,9 @@ class CustomerManagementApplicationServiceIT {
 
     @MockitoSpyBean
     private CustomerEventListener customerEventListener;
+
+    @MockitoSpyBean
+    private CustomerNotificationApplicationService customerNotificationApplicationService;
 
 
     @Test
@@ -62,11 +66,10 @@ class CustomerManagementApplicationServiceIT {
         Mockito.verify(customerEventListener)
                 .listen(Mockito.any(CustomerRegisteredEvent.class));
 
-        Mockito.verify(customerEventListener)
-                .listenSecondary(Mockito.any(CustomerRegisteredEvent.class));
-
         Mockito.verify(customerEventListener, Mockito.never())
                 .listen(Mockito.any(CustomerArchivedEvent.class));
+
+        Mockito.verify(customerNotificationApplicationService).notifyNewRegistration(Mockito.any(CustomerNotificationApplicationService.NotifyNewRegistrationInput.class));
     }
 
     @Test
