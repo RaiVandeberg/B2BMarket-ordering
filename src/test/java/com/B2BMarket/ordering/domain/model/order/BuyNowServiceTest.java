@@ -3,6 +3,7 @@ package com.B2BMarket.ordering.domain.model.order;
 import com.B2BMarket.ordering.domain.model.commons.Money;
 import com.B2BMarket.ordering.domain.model.commons.Quantity;
 import com.B2BMarket.ordering.domain.model.customer.Customer;
+import com.B2BMarket.ordering.domain.model.customer.CustomerId;
 import com.B2BMarket.ordering.domain.model.customer.LoyaltyPoints;
 import com.B2BMarket.ordering.domain.model.product.Product;
 import com.B2BMarket.ordering.domain.model.product.ProductOutOfStockException;
@@ -84,7 +85,7 @@ class BuyNowServiceTest {
         Shipping shipping = aShipping();
         Quantity quantity = new Quantity(2);
 
-        Mockito.when(orders.salesQuantityByCustomerInYear(DEFAULT_CUSTOMER_ID, Year.now())).thenReturn(2L);
+        Mockito.when(orders.salesQuantityByCustomerInYear(Mockito.any(CustomerId.class), Mockito.any(Year.class))).thenReturn(2L);
 
         Order order = buyNowService.buyNow(product, customer, aBilling(), shipping, quantity, PaymentMethod.CREDIT_CARD);
 
@@ -103,7 +104,7 @@ class BuyNowServiceTest {
         Shipping shipping = aShipping();
         Quantity quantity = new Quantity(2);
 
-        Mockito.when(orders.salesQuantityByCustomerInYear(DEFAULT_CUSTOMER_ID, Year.now())).thenReturn(1L);
+        Mockito.when(orders.salesQuantityByCustomerInYear(Mockito.any(CustomerId.class), Mockito.any(Year.class))).thenReturn(1L);
 
         Order order = buyNowService.buyNow(product, customer, aBilling(), shipping, quantity, PaymentMethod.CREDIT_CARD);
 
