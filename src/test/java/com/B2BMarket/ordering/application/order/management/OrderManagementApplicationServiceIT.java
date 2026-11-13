@@ -1,5 +1,6 @@
 package com.B2BMarket.ordering.application.order.management;
 
+import com.B2BMarket.ordering.application.customer.loyalty.CustomerLoyaltyPointsApplicationService;
 import com.B2BMarket.ordering.domain.model.customer.CustomerTestDataBuilder;
 import com.B2BMarket.ordering.domain.model.customer.Customers;
 import com.B2BMarket.ordering.domain.model.order.Order;
@@ -21,6 +22,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @SpringBootTest
 @Transactional
 class OrderManagementApplicationServiceIT {
@@ -36,6 +39,12 @@ class OrderManagementApplicationServiceIT {
 
     @MockitoSpyBean
     private OrderEventListener orderEventListener;
+
+
+    @MockitoSpyBean
+    private CustomerLoyaltyPointsApplicationService customerLoyaltyPointsApplicationService;
+
+
 
     @BeforeEach
     public void setUp(){
@@ -121,6 +130,10 @@ class OrderManagementApplicationServiceIT {
 
         Mockito.verify(orderEventListener, Mockito.times(1))
                 .listen(Mockito.any(OrderReadyEvent.class));
+        Mockito.verify(customerLoyaltyPointsApplicationService).addLoyaltyPoints(
+                Mockito.any(UUID.class),
+                Mockito.any(String.class)
+        );
     }
 
     @Test

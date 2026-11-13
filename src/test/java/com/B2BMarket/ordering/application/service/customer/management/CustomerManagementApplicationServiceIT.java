@@ -1,6 +1,7 @@
 package com.B2BMarket.ordering.application.service.customer.management;
 
 
+import com.B2BMarket.ordering.application.customer.loyalty.CustomerLoyaltyPointsApplicationService;
 import com.B2BMarket.ordering.application.customer.management.CustomerManagementApplicationService;
 import com.B2BMarket.ordering.application.commons.AddressData;
 import com.B2BMarket.ordering.application.customer.management.CustomerInput;
@@ -32,7 +33,6 @@ class CustomerManagementApplicationServiceIT {
 
     @MockitoSpyBean
     private CustomerNotificationApplicationService customerNotificationApplicationService;
-
 
     @Test
     public void shouldRegister(){

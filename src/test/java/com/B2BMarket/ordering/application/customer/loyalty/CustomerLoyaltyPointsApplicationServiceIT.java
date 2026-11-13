@@ -18,10 +18,12 @@ import com.B2BMarket.ordering.domain.model.order.OrderTestDataBuilder;
 import com.B2BMarket.ordering.domain.model.order.Orders;
 import com.B2BMarket.ordering.domain.model.customer.CantAddLoyaltyPointsOrderIsNotReady;
 import com.B2BMarket.ordering.domain.model.product.ProductTestDataBuilder;
+import com.B2BMarket.ordering.infrastructure.listerner.customer.CustomerEventListener;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
@@ -38,6 +40,11 @@ class CustomerLoyaltyPointsApplicationServiceIT {
 
     @Autowired
     private Orders orders;
+
+    // Isola o application service: sem isso, o OrderReadyEvent dos pedidos de fixture
+    // dispara o CustomerEventListener, que já adiciona os pontos no orders.add().
+    @MockitoBean
+    private CustomerEventListener customerEventListener;
 
     @Test
     public void shouldAddLoyaltyPoints(){
