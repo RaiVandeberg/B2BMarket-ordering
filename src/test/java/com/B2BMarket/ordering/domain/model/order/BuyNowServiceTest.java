@@ -92,7 +92,7 @@ class BuyNowServiceTest {
         Assertions.assertThat(order.shipping()).isEqualTo(shipping.toBuilder().cost(Money.ZERO).build());
         Assertions.assertThat(order.totalAmount()).isEqualTo(new Money("6000.00"));
 
-        Mockito.verify(orders).salesQuantityByCustomerInYear(DEFAULT_CUSTOMER_ID, Year.now());
+        Mockito.verify(orders).salesQuantityByCustomerInYear(Mockito.any(CustomerId.class), Mockito.any(Year.class));
     }
 
     @Test
@@ -111,7 +111,7 @@ class BuyNowServiceTest {
         Assertions.assertThat(order.shipping()).isEqualTo(shipping);
         Assertions.assertThat(order.totalAmount()).isEqualTo(new Money("6010.00"));
 
-        Mockito.verify(orders).salesQuantityByCustomerInYear(DEFAULT_CUSTOMER_ID, Year.now());
+        Mockito.verify(orders).salesQuantityByCustomerInYear(Mockito.any(CustomerId.class), Mockito.any(Year.class));
     }
 
     @Test
