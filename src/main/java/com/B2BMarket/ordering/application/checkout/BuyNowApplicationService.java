@@ -2,7 +2,10 @@ package com.B2BMarket.ordering.application.checkout;
 
 import com.B2BMarket.ordering.domain.model.commons.Quantity;
 import com.B2BMarket.ordering.domain.model.commons.ZipCode;
+import com.B2BMarket.ordering.domain.model.customer.Customer;
 import com.B2BMarket.ordering.domain.model.customer.CustomerId;
+import com.B2BMarket.ordering.domain.model.customer.CustomerNotFoundException;
+import com.B2BMarket.ordering.domain.model.customer.Customers;
 import com.B2BMarket.ordering.domain.model.order.*;
 import com.B2BMarket.ordering.domain.model.order.shipping.OriginAddressService;
 import com.B2BMarket.ordering.domain.model.order.shipping.ShippingCostService;
@@ -27,6 +30,7 @@ public class BuyNowApplicationService {
     private final OriginAddressService originAddressService;
 
     private final Orders orders;
+    private final Customers customers;
 
     private final ShippingInputDisassembler shippingInputDisassembler;
     private final BillingInputDisassembler billingInputDisassembler;
@@ -39,6 +43,8 @@ public class BuyNowApplicationService {
         CustomerId customerId = new CustomerId(input.getCustomerId());
         Quantity quantity = new Quantity(input.getQuantity());
 
+        Customer customer = customers.ofId(customerId).orElseThrow(() -> new CustomerNotFoundException(customerId));
+
         Product product = findProduct(new ProductId(input.getProductId()));
 
         var shippingCalculationResult = calculateShippingCost(input.getShipping());
@@ -47,8 +53,10 @@ public class BuyNowApplicationService {
 
         Billing billing = billingInputDisassembler.toDomainModel(input.getBilling());
 
+
+
         Order order = buyNowService.buyNow(
-                product, customerId, billing, shipping, quantity, paymentMethod
+                product, customer, billing, shipping, quantity, paymentMethod
         );
 
         orders.add(order);

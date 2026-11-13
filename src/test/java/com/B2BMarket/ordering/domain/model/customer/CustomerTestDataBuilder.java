@@ -24,15 +24,7 @@ public class CustomerTestDataBuilder {
                 .phone(new Phone("478-256-2604"))
                 .document(new Document("255-08-0578"))
                 .promotionNotificationsAllowed(true)
-                .address(Address.builder()
-                        .street("Bourbon Street")
-                        .number("1134")
-                        .neighborhood("North Ville")
-                        .city("York")
-                        .state("South California")
-                        .zipCode(new ZipCode("12345"))
-                        .complement("Apt. 114")
-                        .build());
+                .address(anAddress());
     }
 
     public static Customer.ExistingCustomerBuild existingCustomer() {
@@ -47,18 +39,8 @@ public class CustomerTestDataBuilder {
                 .email(new Email("johndoe@email.com"))
                 .phone(new Phone("478-256-2604"))
                 .document(new Document("255-08-0578"))
-                .promotionNotificationsAllowed(true)
                 .loyaltyPoints(LoyaltyPoints.ZERO)
-                .address(Address.builder()
-                        .street("Bourbon Street")
-                        .number("1134")
-                        .neighborhood("North Ville")
-                        .city("York")
-                        .state("South California")
-                        .zipCode(new ZipCode("12345"))
-                        .complement("Apt. 114")
-                        .build())
-                ;
+                .address(anAddress());
     }
 
     public static Customer.ExistingCustomerBuild existingAnonymizedCustomer() {
@@ -74,16 +56,18 @@ public class CustomerTestDataBuilder {
                 .registeredAt(OffsetDateTime.now())
                 .archivedAt(OffsetDateTime.now())
                 .loyaltyPoints(new LoyaltyPoints(10))
-                .address(Address.builder()
-                        .street("Bourbon Street")
-                        .number("1134")
-                        .neighborhood("North Ville")
-                        .city("York")
-                        .state("South California")
-                        .zipCode(new ZipCode("12345"))
-                        .complement("Apt. 114")
-                        .build());
+                .address(anAddress());
     }
 
-
+    private static Address anAddress() {
+        return Address.builder()
+                .street("Bourbon Street")
+                .number("1134")
+                .neighborhood("North Ville")
+                .city("York")
+                .state("South California")
+                .zipCode(new ZipCode("12345"))
+                .complement("Apt. 114")
+                .build();
+    }
 }

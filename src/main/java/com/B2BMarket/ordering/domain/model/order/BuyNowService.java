@@ -1,19 +1,27 @@
 package com.B2BMarket.ordering.domain.model.order;
 
 import com.B2BMarket.ordering.domain.model.DomainService;
+import com.B2BMarket.ordering.domain.model.commons.Money;
 import com.B2BMarket.ordering.domain.model.commons.Quantity;
+import com.B2BMarket.ordering.domain.model.customer.Customer;
 import com.B2BMarket.ordering.domain.model.customer.CustomerId;
+import com.B2BMarket.ordering.domain.model.customer.LoyaltyPoints;
 import com.B2BMarket.ordering.domain.model.product.Product;
+import lombok.RequiredArgsConstructor;
 
+import java.time.Year;
 import java.util.Objects;
 
 @DomainService()
+@RequiredArgsConstructor
 public class BuyNowService {
 
-    public Order buyNow(Product product, CustomerId customerId, Billing billing,
+    private final Orders orders;
+
+    public Order buyNow(Product product, Customer customer, Billing billing,
                         Shipping shipping, Quantity quantity, PaymentMethod paymentMethod) {
         Objects.requireNonNull(product);
-        Objects.requireNonNull(customerId);
+        Objects.requireNonNull(customer.id());
         Objects.requireNonNull(billing);
         Objects.requireNonNull(shipping);
         Objects.requireNonNull(quantity);
@@ -21,15 +29,28 @@ public class BuyNowService {
 
         product.checkOutOfStock();
 
-        Order order = Order.draft(customerId);
+        Order order = Order.draft(customer.id());
         order.changeBilling(billing);
-        order.changeShipping(shipping);
+
         order.changePaymentMethod(paymentMethod);
 
         order.addItem(product, quantity);
 
+        if(haveFreeShipping(customer)){
+            Shipping freeShipping = shipping.toBuilder().cost(Money.ZERO).build();
+            order.changeShipping(freeShipping);
+        }else {
+            order.changeShipping(shipping);
+        }
+
         order.place();
 
         return order;
+    }
+
+    private boolean haveFreeShipping(Customer customer) {
+        return customer.loyaltyPoints().compareTo(new LoyaltyPoints(100)) >= 0
+                && orders.salesQuantityByCustomerInYear(customer.id(), Year.now()) >= 2
+                || customer.loyaltyPoints().compareTo(new LoyaltyPoints(2000)) >= 0;
     }
 }
