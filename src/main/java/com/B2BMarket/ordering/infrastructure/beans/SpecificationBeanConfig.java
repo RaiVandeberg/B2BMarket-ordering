@@ -1,5 +1,6 @@
 package com.B2BMarket.ordering.infrastructure.beans;
 
+import com.B2BMarket.ordering.domain.model.customer.LoyaltyPoints;
 import com.B2BMarket.ordering.domain.model.order.CustomerHaveFreeShippingSpecification;
 import com.B2BMarket.ordering.domain.model.order.Orders;
 import org.springframework.context.annotation.Bean;
@@ -12,9 +13,9 @@ public class SpecificationBeanConfig {
     public CustomerHaveFreeShippingSpecification customerHaveFreeShippingSpecification(Orders orders) {
         return new CustomerHaveFreeShippingSpecification(
                 orders,
-                200,
+                new LoyaltyPoints(200),
                 2,
-                2000
+                new LoyaltyPoints(2000)
         );
     }
 
