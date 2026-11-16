@@ -4,12 +4,9 @@ import com.B2BMarket.ordering.domain.model.DomainService;
 import com.B2BMarket.ordering.domain.model.commons.Money;
 import com.B2BMarket.ordering.domain.model.commons.Quantity;
 import com.B2BMarket.ordering.domain.model.customer.Customer;
-import com.B2BMarket.ordering.domain.model.customer.CustomerId;
-import com.B2BMarket.ordering.domain.model.customer.LoyaltyPoints;
 import com.B2BMarket.ordering.domain.model.product.Product;
 import lombok.RequiredArgsConstructor;
 
-import java.time.Year;
 import java.util.Objects;
 
 @DomainService()

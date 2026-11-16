@@ -1,18 +1,27 @@
 package com.B2BMarket.ordering.domain.model.order;
 
 import com.B2BMarket.ordering.domain.model.DomainService;
+import com.B2BMarket.ordering.domain.model.commons.Money;
+import com.B2BMarket.ordering.domain.model.customer.Customer;
 import com.B2BMarket.ordering.domain.model.product.Product;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCart;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartCantProceedToCheckoutException;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartItem;
+import lombok.RequiredArgsConstructor;
 
 import java.util.Objects;
 
+@RequiredArgsConstructor
 @DomainService()
 public class CheckoutService {
 
-    public Order checkout(ShoppingCart shoppingCart, Billing billing,
-                          Shipping shipping, PaymentMethod paymentMethod) {
+    private final CustomerHaveFreeShippingSpecification haveFreeShippingSpecification;
+
+    public Order checkout(Customer customer,
+                          ShoppingCart shoppingCart,
+                          Billing billing,
+                          Shipping shipping,
+                          PaymentMethod paymentMethod) {
         Objects.requireNonNull(shoppingCart);
         Objects.requireNonNull(billing);
         Objects.requireNonNull(shipping);
@@ -24,7 +33,14 @@ public class CheckoutService {
 
         Order order = Order.draft(shoppingCart.customerId());
         order.changeBilling(billing);
-        order.changeShipping(shipping);
+
+        if(haveFreeShipping(customer)){
+            Shipping freeShipping = shipping.toBuilder().cost(Money.ZERO).build();
+            order.changeShipping(freeShipping);
+        }else {
+            order.changeShipping(shipping);
+        }
+
         order.changePaymentMethod(paymentMethod);
 
         for (ShoppingCartItem item : shoppingCart.items()) {
@@ -42,5 +58,9 @@ public class CheckoutService {
         shoppingCart.empty();
 
         return order;
+    }
+
+    private boolean haveFreeShipping(Customer customer) {
+        return haveFreeShippingSpecification.isSatisfied(customer);
     }
 }

@@ -1,6 +1,10 @@
 package com.B2BMarket.ordering.application.checkout;
 
 import com.B2BMarket.ordering.domain.model.commons.ZipCode;
+import com.B2BMarket.ordering.domain.model.customer.Customer;
+import com.B2BMarket.ordering.domain.model.customer.CustomerId;
+import com.B2BMarket.ordering.domain.model.customer.CustomerNotFoundException;
+import com.B2BMarket.ordering.domain.model.customer.Customers;
 import com.B2BMarket.ordering.domain.model.order.Billing;
 import com.B2BMarket.ordering.domain.model.order.CheckoutService;
 import com.B2BMarket.ordering.domain.model.order.Order;
@@ -25,6 +29,7 @@ public class CheckoutApplicationService {
 
     private final CheckoutService checkoutService;
     private final ShoppingCarts shoppingCarts;
+    private final Customers customers;
 
     private final ShippingCostService shippingCostService;
     private final OriginAddressService originAddressService;
@@ -39,10 +44,13 @@ public class CheckoutApplicationService {
         Objects.requireNonNull(input);
 
         PaymentMethod paymentMethod = PaymentMethod.valueOf(input.getPaymentMethod());
-
         ShoppingCartId shoppingCartId = new ShoppingCartId(input.getShoppingCartId());
         ShoppingCart shoppingCart = shoppingCarts.ofId(shoppingCartId)
                 .orElseThrow(() -> new ShoppingCartNotFoundException(shoppingCartId));
+
+        CustomerId customerId = shoppingCart.customerId();
+        Customer customer = customers.ofId(customerId)
+                .orElseThrow(() -> new CustomerNotFoundException(customerId));
 
         var shippingCalculationResult = calculateShippingCost(input.getShipping());
 
@@ -50,7 +58,7 @@ public class CheckoutApplicationService {
 
         Billing billing = billingInputDisassembler.toDomainModel(input.getBilling());
 
-        Order order = checkoutService.checkout(shoppingCart, billing, shipping, paymentMethod);
+        Order order = checkoutService.checkout(customer, shoppingCart, billing, shipping, paymentMethod);
 
         orders.add(order);
         shoppingCarts.add(shoppingCart);

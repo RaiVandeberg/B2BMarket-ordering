@@ -1,12 +1,19 @@
 package com.B2BMarket.ordering.domain.model.order;
 
 import com.B2BMarket.ordering.domain.model.commons.Money;
+import com.B2BMarket.ordering.domain.model.customer.Customer;
+import com.B2BMarket.ordering.domain.model.customer.CustomerTestDataBuilder;
+import com.B2BMarket.ordering.domain.model.customer.LoyaltyPoints;
 import com.B2BMarket.ordering.domain.model.product.ProductTestDataBuilder;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCart;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartCantProceedToCheckoutException;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartItem;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
@@ -15,20 +22,38 @@ import static com.B2BMarket.ordering.domain.model.order.OrderTestDataBuilder.aBi
 import static com.B2BMarket.ordering.domain.model.order.OrderTestDataBuilder.aShipping;
 import static com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartTestDataBuilder.aShoppingCart;
 
+@ExtendWith(MockitoExtension.class)
 class CheckoutServiceTest {
 
-    private final CheckoutService checkoutService = new CheckoutService();
+
+    private CheckoutService checkoutService;
+
+    @Mock
+    private Orders orders;
+
+    @BeforeEach
+    void setUp() {
+        var specification = new CustomerHaveFreeShippingSpecification(
+                orders,
+                new LoyaltyPoints(100),
+                2L,
+                new LoyaltyPoints(2000)
+        );
+        checkoutService = new CheckoutService(specification);
+    }
 
     @Test
     public void givenValidShoppingCart_WhenCheckingOut_ShouldCreatePlacedOrderAndEmptyCart() {
-        ShoppingCart shoppingCart = aShoppingCart().build();
+        Customer customer = CustomerTestDataBuilder.existingCustomer().build();
+
+        ShoppingCart shoppingCart = aShoppingCart().customerId(customer.id()).build();
         List<ShoppingCartItem> cartItems = List.copyOf(shoppingCart.items());
 
         Billing billing = aBilling();
         Shipping shipping = aShipping();
         PaymentMethod paymentMethod = PaymentMethod.CREDIT_CARD;
 
-        Order order = checkoutService.checkout(shoppingCart, billing, shipping, paymentMethod);
+        Order order = checkoutService.checkout(customer, shoppingCart, billing, shipping, paymentMethod);
 
         Assertions.assertThat(order).isNotNull();
         Assertions.assertThat(order.customerId()).isEqualTo(DEFAULT_CUSTOMER_ID);
@@ -57,7 +82,9 @@ class CheckoutServiceTest {
 
     @Test
     public void givenShoppingCartWithUnavailableItems_WhenCheckingOut_ShouldThrowExceptionAndKeepCartUnchanged() {
-        ShoppingCart shoppingCart = aShoppingCart().build();
+        Customer customer = CustomerTestDataBuilder.existingCustomer().build();
+
+        ShoppingCart shoppingCart = aShoppingCart().customerId(customer.id()).build();
         shoppingCart.refreshItem(ProductTestDataBuilder.aProduct().inStock(false).build());
 
         Billing billing = aBilling();
@@ -65,7 +92,7 @@ class CheckoutServiceTest {
         PaymentMethod paymentMethod = PaymentMethod.CREDIT_CARD;
 
         Assertions.assertThatThrownBy(() ->
-                        checkoutService.checkout(shoppingCart, billing, shipping, paymentMethod))
+                        checkoutService.checkout(customer, shoppingCart, billing, shipping, paymentMethod))
                 .isInstanceOf(ShoppingCartCantProceedToCheckoutException.class);
 
         Assertions.assertThat(shoppingCart.isEmpty()).isFalse();
@@ -75,14 +102,16 @@ class CheckoutServiceTest {
 
     @Test
     public void givenEmptyShoppingCart_WhenCheckingOut_ShouldThrowExceptionAndKeepCartEmpty() {
-        ShoppingCart shoppingCart = aShoppingCart().empty().build();
+        Customer customer = CustomerTestDataBuilder.existingCustomer().build();
+
+        ShoppingCart shoppingCart = aShoppingCart().customerId(customer.id()).empty().build();
 
         Billing billing = aBilling();
         Shipping shipping = aShipping();
         PaymentMethod paymentMethod = PaymentMethod.CREDIT_CARD;
 
         Assertions.assertThatThrownBy(() ->
-                        checkoutService.checkout(shoppingCart, billing, shipping, paymentMethod))
+                        checkoutService.checkout(customer, shoppingCart, billing, shipping, paymentMethod))
                 .isInstanceOf(ShoppingCartCantProceedToCheckoutException.class);
 
         Assertions.assertThat(shoppingCart.isEmpty()).isTrue();
