@@ -87,6 +87,22 @@ class BuyNowServiceTest {
     }
 
     @Test
+    public void givenCustomerWith3000LoyaltyPoints_WhenBuyingNow_ShouldCreateOrderWithFreeShipping() {
+        Product product = ProductTestDataBuilder.aProduct().build();
+        Customer customer = existingCustomer()
+                .loyaltyPoints(new LoyaltyPoints(3000))
+                .build();
+        Shipping shipping = aShipping();
+        Quantity quantity = new Quantity(2);
+
+        Order order = buyNowService.buyNow(product, customer, aBilling(), shipping, quantity, PaymentMethod.CREDIT_CARD);
+
+        Assertions.assertThat(order.shipping()).isEqualTo(shipping.toBuilder().cost(Money.ZERO).build());
+        Assertions.assertThat(order.totalAmount()).isEqualTo(new Money("6000.00"));
+        Assertions.assertThat(order.isPlaced()).isTrue();
+    }
+
+    @Test
     public void givenCustomerWith100LoyaltyPointsAnd2SalesInYear_WhenBuyingNow_ShouldCreateOrderWithFreeShipping() {
         Product product = ProductTestDataBuilder.aProduct().build();
         Customer customer = existingCustomer()
