@@ -81,6 +81,24 @@ class CheckoutServiceTest {
     }
 
     @Test
+    public void givenCustomerWith3000LoyaltyPoints_WhenCheckingOut_ShouldCreateOrderWithFreeShipping() {
+        Customer customer = CustomerTestDataBuilder.existingCustomer()
+                .loyaltyPoints(new LoyaltyPoints(3000))
+                .build();
+
+        ShoppingCart shoppingCart = aShoppingCart().customerId(customer.id()).build();
+
+        Shipping shipping = aShipping();
+
+        Order order = checkoutService.checkout(customer, shoppingCart, aBilling(), shipping, PaymentMethod.CREDIT_CARD);
+
+        Assertions.assertThat(order.shipping()).isEqualTo(shipping.toBuilder().cost(Money.ZERO).build());
+        Assertions.assertThat(order.totalAmount()).isEqualTo(new Money("6200.00"));
+        Assertions.assertThat(order.isPlaced()).isTrue();
+        Assertions.assertThat(shoppingCart.isEmpty()).isTrue();
+    }
+
+    @Test
     public void givenShoppingCartWithUnavailableItems_WhenCheckingOut_ShouldThrowExceptionAndKeepCartUnchanged() {
         Customer customer = CustomerTestDataBuilder.existingCustomer().build();
 
