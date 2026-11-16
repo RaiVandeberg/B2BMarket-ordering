@@ -18,7 +18,7 @@ public class BuyNowService {
     public Order buyNow(Product product, Customer customer, Billing billing,
                         Shipping shipping, Quantity quantity, PaymentMethod paymentMethod) {
         Objects.requireNonNull(product);
-        Objects.requireNonNull(customer.id());
+        Objects.requireNonNull(customer);
         Objects.requireNonNull(billing);
         Objects.requireNonNull(shipping);
         Objects.requireNonNull(quantity);

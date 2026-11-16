@@ -2,12 +2,14 @@ package com.B2BMarket.ordering.domain.model.order;
 
 import com.B2BMarket.ordering.domain.model.commons.Money;
 import com.B2BMarket.ordering.domain.model.customer.Customer;
+import com.B2BMarket.ordering.domain.model.customer.CustomerId;
 import com.B2BMarket.ordering.domain.model.customer.CustomerTestDataBuilder;
 import com.B2BMarket.ordering.domain.model.customer.LoyaltyPoints;
 import com.B2BMarket.ordering.domain.model.product.ProductTestDataBuilder;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCart;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartCantProceedToCheckoutException;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartItem;
+import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartNotBelongsToCustomerException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -96,6 +98,20 @@ class CheckoutServiceTest {
         Assertions.assertThat(order.totalAmount()).isEqualTo(new Money("6200.00"));
         Assertions.assertThat(order.isPlaced()).isTrue();
         Assertions.assertThat(shoppingCart.isEmpty()).isTrue();
+    }
+
+    @Test
+    public void givenShoppingCartOfAnotherCustomer_WhenCheckingOut_ShouldThrowExceptionAndKeepCartUnchanged() {
+        Customer customer = CustomerTestDataBuilder.existingCustomer().build();
+
+        ShoppingCart shoppingCart = aShoppingCart().customerId(new CustomerId()).build();
+
+        Assertions.assertThatThrownBy(() ->
+                        checkoutService.checkout(customer, shoppingCart, aBilling(), aShipping(), PaymentMethod.CREDIT_CARD))
+                .isInstanceOf(ShoppingCartNotBelongsToCustomerException.class);
+
+        Assertions.assertThat(shoppingCart.isEmpty()).isFalse();
+        Assertions.assertThat(shoppingCart.items()).hasSize(2);
     }
 
     @Test

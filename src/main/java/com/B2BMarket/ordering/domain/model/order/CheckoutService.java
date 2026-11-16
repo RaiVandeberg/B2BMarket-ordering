@@ -7,6 +7,7 @@ import com.B2BMarket.ordering.domain.model.product.Product;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCart;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartCantProceedToCheckoutException;
 import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartItem;
+import com.B2BMarket.ordering.domain.model.shoppingcart.ShoppingCartNotBelongsToCustomerException;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Objects;
@@ -22,10 +23,15 @@ public class CheckoutService {
                           Billing billing,
                           Shipping shipping,
                           PaymentMethod paymentMethod) {
+        Objects.requireNonNull(customer);
         Objects.requireNonNull(shoppingCart);
         Objects.requireNonNull(billing);
         Objects.requireNonNull(shipping);
         Objects.requireNonNull(paymentMethod);
+
+        if (!shoppingCart.customerId().equals(customer.id())) {
+            throw new ShoppingCartNotBelongsToCustomerException();
+        }
 
         if (shoppingCart.containsUnavailableItems() || shoppingCart.isEmpty()) {
             throw new ShoppingCartCantProceedToCheckoutException();
