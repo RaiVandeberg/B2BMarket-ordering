@@ -16,7 +16,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class BuyNowService {
 
-    private final Orders orders;
+    private final CustomerHaveFreeShippingSpecification customerHaveFreeShippingSpecification;
 
     public Order buyNow(Product product, Customer customer, Billing billing,
                         Shipping shipping, Quantity quantity, PaymentMethod paymentMethod) {
@@ -49,8 +49,6 @@ public class BuyNowService {
     }
 
     private boolean haveFreeShipping(Customer customer) {
-        return customer.loyaltyPoints().compareTo(new LoyaltyPoints(100)) >= 0
-                && orders.salesQuantityByCustomerInYear(customer.id(), Year.now()) >= 2
-                || customer.loyaltyPoints().compareTo(new LoyaltyPoints(2000)) >= 0;
+        return customerHaveFreeShippingSpecification.isSatisfied(customer);
     }
 }

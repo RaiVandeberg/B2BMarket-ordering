@@ -9,6 +9,7 @@ import com.B2BMarket.ordering.domain.model.product.Product;
 import com.B2BMarket.ordering.domain.model.product.ProductOutOfStockException;
 import com.B2BMarket.ordering.domain.model.product.ProductTestDataBuilder;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -29,9 +30,18 @@ class BuyNowServiceTest {
     @Mock
     private Orders orders;
 
-    @InjectMocks
     private BuyNowService buyNowService;
 
+    @BeforeEach
+    void setUp() {
+        var specification = new CustomerHaveFreeShippingSpecification(
+                orders,
+                100,
+                2L,
+                2000
+        );
+        buyNowService = new BuyNowService(specification);
+    }
     @Test
     public void givenValidProduct_WhenBuyingNow_ShouldCreatePlacedOrderWithTheItem() {
         Product product = ProductTestDataBuilder.aProduct().build();
