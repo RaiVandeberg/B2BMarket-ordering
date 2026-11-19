@@ -2,7 +2,7 @@ package com.B2BMarket.ordering.application.customer.management;
 
 import com.B2BMarket.ordering.application.commons.AddressData;
 
-import com.B2BMarket.ordering.application.utility.Mapper;
+
 import com.B2BMarket.ordering.domain.model.commons.Address;
 import com.B2BMarket.ordering.domain.model.commons.Document;
 import com.B2BMarket.ordering.domain.model.commons.Email;
@@ -24,8 +24,6 @@ public class CustomerManagementApplicationService {
     private final CustomerRegistrationService customerRegistrationService;
     private final Customers customers;
 
-    private final Mapper mapper;
-
     @Transactional
     public UUID create(CustomerInput input){
         Objects.requireNonNull(input);
@@ -45,16 +43,6 @@ public class CustomerManagementApplicationService {
         customers.add(customer);
 
         return customer.id().value();
-    }
-
-    @Transactional(readOnly = true)
-    public CustomerOutput findById(UUID customerId){
-        Objects.requireNonNull(customerId);
-        CustomerId id = new CustomerId(customerId);
-        Customer customer = customers.ofId(id)
-                .orElseThrow(() -> new CustomerNotFoundException(id));
-
-        return mapper.convert(customer, CustomerOutput.class);
     }
 
     @Transactional
