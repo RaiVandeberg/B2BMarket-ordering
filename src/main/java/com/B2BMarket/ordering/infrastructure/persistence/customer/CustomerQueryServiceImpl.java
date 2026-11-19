@@ -4,24 +4,64 @@ import com.B2BMarket.ordering.application.customer.query.CustomerOutput;
 import com.B2BMarket.ordering.application.customer.query.CustomerQueryService;
 import com.B2BMarket.ordering.domain.model.customer.CustomerId;
 import com.B2BMarket.ordering.domain.model.customer.CustomerNotFoundException;
+import jakarta.persistence.EntityManager;
+
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.TypedQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class CustomerQueryServiceImpl implements CustomerQueryService {
 
-    private final CustomerPersistenceEntityRepository repository;
+    private final EntityManager entityManager;
+
+
+    private static final String findByIdAsOutputJPQL = """
+            SELECT new com.B2BMarket.ordering.application.customer.query.CustomerOutput(
+                c.id,
+                c.firstName,
+                c.lastName,
+                c.email,
+                c.document,
+                c.phone,
+                c.birthDate,
+                c.loyaltyPoints,
+                c.registeredAt,
+                c.archivedAt,
+                new com.B2BMarket.ordering.application.commons.AddressData(
+                    c.address.street,
+                    c.address.number,
+                    c.address.complement,
+                    c.address.neighborhood,
+                    c.address.city,
+                    c.address.state,
+                    c.address.zipCode
+                ),
+                c.promotionNotificationsAllowed,
+                c.archived
+            )
+            FROM CustomerPersistenceEntity c
+            WHERE c.id = :id""";
 
 
     @Override
     public CustomerOutput findById(UUID customerId) {
         Objects.requireNonNull(customerId);
+        try {
+            TypedQuery<CustomerOutput> query = entityManager.createQuery(findByIdAsOutputJPQL, CustomerOutput.class);
+            query.setParameter("id", customerId);
+            return query.getSingleResult();
+        }catch(NoResultException e){
+            throw  new CustomerNotFoundException(new CustomerId(customerId));
+        }
 
-        return repository.findByAsOutput(customerId)
-                .orElseThrow(() -> new CustomerNotFoundException(new CustomerId(customerId)));
     }
 }
