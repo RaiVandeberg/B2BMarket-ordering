@@ -1,6 +1,8 @@
 package com.B2BMarket.ordering.application.checkout;
 
 import com.B2BMarket.ordering.application.commons.AddressData;
+import com.B2BMarket.ordering.application.order.query.BillingData;
+import com.B2BMarket.ordering.application.order.query.RecipientData;
 
 import java.util.UUID;
 

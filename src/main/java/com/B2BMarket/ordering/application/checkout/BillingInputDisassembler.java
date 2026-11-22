@@ -1,6 +1,7 @@
 package com.B2BMarket.ordering.application.checkout;
 
 import com.B2BMarket.ordering.application.commons.AddressData;
+import com.B2BMarket.ordering.application.order.query.BillingData;
 import com.B2BMarket.ordering.domain.model.commons.*;
 import com.B2BMarket.ordering.domain.model.order.Billing;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,5 @@
 package com.B2BMarket.ordering.application.order.query;
 
-import com.B2BMarket.ordering.application.checkout.BillingData;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

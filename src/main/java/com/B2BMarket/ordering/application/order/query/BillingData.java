@@ -1,4 +1,4 @@
-package com.B2BMarket.ordering.application.checkout;
+package com.B2BMarket.ordering.application.order.query;
 
 import com.B2BMarket.ordering.application.commons.AddressData;
 import lombok.AllArgsConstructor;

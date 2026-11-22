@@ -1,8 +1,6 @@
 package com.B2BMarket.ordering.application.order.query;
 
-import com.B2BMarket.ordering.application.checkout.RecipientData;
 import com.B2BMarket.ordering.application.commons.AddressData;
-import com.B2BMarket.ordering.domain.model.commons.Money;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
