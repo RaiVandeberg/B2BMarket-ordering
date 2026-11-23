@@ -1,9 +1,6 @@
 package com.B2BMarket.ordering.infrastructure.persistence.order;
 
-import com.B2BMarket.ordering.application.order.query.CustomerMinimalOutput;
-import com.B2BMarket.ordering.application.order.query.OrderDetailOutput;
-import com.B2BMarket.ordering.application.order.query.OrderQueryService;
-import com.B2BMarket.ordering.application.order.query.OrderSummaryOutput;
+import com.B2BMarket.ordering.application.order.query.*;
 import com.B2BMarket.ordering.application.utility.Mapper;
 import com.B2BMarket.ordering.application.utility.PageFilter;
 import com.B2BMarket.ordering.domain.model.order.OrderId;
@@ -19,6 +16,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.List;
+
 
 @Component
 @RequiredArgsConstructor
@@ -37,7 +36,7 @@ public class OrderQueryServiceImpl implements OrderQueryService {
     }
 
     @Override
-    public Page<OrderSummaryOutput> filter(PageFilter filter) {
+    public Page<OrderSummaryOutput> filter(OrderFilter filter) {
         Long totalQueryResults = countTotalQueryResults(filter);
 
         if (totalQueryResults.equals(0L)) {
@@ -47,20 +46,23 @@ public class OrderQueryServiceImpl implements OrderQueryService {
         return filterQuery(filter, totalQueryResults);
     }
 
-    private Long countTotalQueryResults(PageFilter filter) {
+    private Long countTotalQueryResults(OrderFilter filter) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
         Root<OrderPersistenceEntity> root = criteriaQuery.from(OrderPersistenceEntity.class);
 
         Expression<Long> count = builder.count(root);
+        Predicate[] predicates = toPredicates(builder, root, filter);
+
         criteriaQuery.select(count);
+        criteriaQuery.where(predicates);
 
         TypedQuery<Long> query = entityManager.createQuery(criteriaQuery);
 
         return query.getSingleResult();
     }
 
-    private Page<OrderSummaryOutput> filterQuery(PageFilter filter, Long totalQueryResults) {
+    private Page<OrderSummaryOutput> filterQuery(OrderFilter filter, Long totalQueryResults) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<OrderSummaryOutput> criteriaQuery = builder.createQuery(OrderSummaryOutput.class);
         Root<OrderPersistenceEntity> root = criteriaQuery.from(OrderPersistenceEntity.class);
@@ -87,6 +89,9 @@ public class OrderQueryServiceImpl implements OrderQueryService {
                         root.get("status"),
                         root.get("paymentMethod")
                 ));
+        Predicate[] predicates = toPredicates(builder, root, filter);
+
+        criteriaQuery.where(predicates);
 
         TypedQuery<OrderSummaryOutput> typedQuery = entityManager.createQuery(criteriaQuery);
 
@@ -96,6 +101,16 @@ public class OrderQueryServiceImpl implements OrderQueryService {
         PageRequest pageRequest = PageRequest.of(filter.getPage(), filter.getSize());
 
         return new PageImpl<>(typedQuery.getResultList(), pageRequest, totalQueryResults);
+    }
+
+    private Predicate[] toPredicates(CriteriaBuilder builder, Root<OrderPersistenceEntity> root, OrderFilter filter) {
+        List<Predicate> predicates = new ArrayList<>();
+
+        if (filter.getCustomerId() != null) {
+            predicates.add( builder.equal(root.get("customer").get("id"), filter.getCustomerId()));
+        }
+
+        return predicates.toArray(new Predicate[]{});
     }
 
 

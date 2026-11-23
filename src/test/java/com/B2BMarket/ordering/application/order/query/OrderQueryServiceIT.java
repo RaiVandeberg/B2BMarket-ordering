@@ -3,6 +3,7 @@ package com.B2BMarket.ordering.application.order.query;
 
 import com.B2BMarket.ordering.application.utility.PageFilter;
 import com.B2BMarket.ordering.domain.model.customer.Customer;
+import com.B2BMarket.ordering.domain.model.customer.CustomerId;
 import com.B2BMarket.ordering.domain.model.customer.CustomerTestDataBuilder;
 import com.B2BMarket.ordering.domain.model.customer.Customers;
 import com.B2BMarket.ordering.domain.model.order.Order;
@@ -60,11 +61,38 @@ class OrderQueryServiceIT {
         orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.READY).customerId(customer.id()).build());
         orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.CANCELLED).customerId(customer.id()).build());
 
-        Page<OrderSummaryOutput> page = queryService.filter(new PageFilter(3, 0));
+        Page<OrderSummaryOutput> page = queryService.filter(new OrderFilter(3, 0));
 
         Assertions.assertThat(page.getTotalPages()).isEqualTo(2);
         Assertions.assertThat(page.getTotalElements()).isEqualTo(5);
         Assertions.assertThat(page.getNumberOfElements()).isEqualTo(3);
     }
+
+    @Test
+    public void shouldFilterByCustomerId(){
+        Customer customer1 = CustomerTestDataBuilder.existingCustomer().build();
+        customers.add(customer1);
+
+        orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.DRAFT).withItems(false).customerId(customer1.id()).build());
+        orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.PLACED).customerId(customer1.id()).build());
+
+        Customer customer2 = CustomerTestDataBuilder.existingCustomer().id(new CustomerId()).build();
+        customers.add(customer2);
+
+        orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.PAID).customerId(customer2.id()).build());
+        orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.READY).customerId(customer2.id()).build());
+        orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.CANCELLED).customerId(customer2.id()).build());
+
+        OrderFilter filter = new OrderFilter();
+        filter.setCustomerId(customer1.id().value());
+
+        Page<OrderSummaryOutput> page = queryService.filter(filter);
+
+        Assertions.assertThat(page.getTotalPages()).isEqualTo(1);
+        Assertions.assertThat(page.getTotalElements()).isEqualTo(2);
+        Assertions.assertThat(page.getNumberOfElements()).isEqualTo(2);
+    }
+
+
 
 }

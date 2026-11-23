@@ -1,9 +1,9 @@
 package com.B2BMarket.ordering.application.order.query;
 
-import com.B2BMarket.ordering.application.utility.PageFilter;
+
 import org.springframework.data.domain.Page;
 
 public interface OrderQueryService {
     OrderDetailOutput findById(String id);
-    Page<OrderSummaryOutput> filter(PageFilter filter);
+    Page<OrderSummaryOutput> filter(OrderFilter filter);
 }
