@@ -3,6 +3,7 @@ package com.B2BMarket.ordering.infrastructure.utility.modelmapper;
 import com.B2BMarket.ordering.application.customer.query.CustomerOutput;
 import com.B2BMarket.ordering.application.order.query.OrderDetailOutput;
 import com.B2BMarket.ordering.application.order.query.OrderItemDetailOutput;
+import com.B2BMarket.ordering.application.shoppingcart.query.ShoppingCartItemOutput;
 import com.B2BMarket.ordering.application.utility.Mapper;
 
 import com.B2BMarket.ordering.domain.model.commons.FullName;
@@ -10,6 +11,7 @@ import com.B2BMarket.ordering.domain.model.customer.BirthDate;
 import com.B2BMarket.ordering.domain.model.customer.Customer;
 import com.B2BMarket.ordering.infrastructure.persistence.order.OrderItemPersistenceEntity;
 import com.B2BMarket.ordering.infrastructure.persistence.order.OrderPersistenceEntity;
+import com.B2BMarket.ordering.infrastructure.persistence.shoppingcart.ShoppingCartItemPersistenceEntity;
 import io.hypersistence.tsid.TSID;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
@@ -99,6 +101,10 @@ public class ModelMapperConfig {
                 .addMappings(mapping ->
                         mapping.using(longToStringTSIDConverter)
                                 .map(OrderItemPersistenceEntity::getOrderId, OrderItemDetailOutput::setOrderId));
+
+        modelMapper.createTypeMap(ShoppingCartItemPersistenceEntity.class, ShoppingCartItemOutput.class)
+                .addMappings(mapping ->
+                        mapping.map(ShoppingCartItemPersistenceEntity::getProductName, ShoppingCartItemOutput::setName));
     }
 
 }
